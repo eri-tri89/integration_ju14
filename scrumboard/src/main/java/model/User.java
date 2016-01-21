@@ -3,36 +3,48 @@ package model;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
 
+/**
+ * 
+ * @author Jesper Wendler
+ *
+ */
+
 @Entity
-public class User implements Serializable{
-	//@ManyToOne
-	//@JoinColumn(name = "userId")
+public class User implements Serializable {
 
-	public User(){
-		
+	public User() {
+
 	}
-	
-	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
-	 private long id;
 
-	
-	String userId;
-	
-	String firstName;
-	
-	String lastName;
-	
-	String userName;
-	
-	Enum userStatus;
-	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	private String userId;
+
+	private String firstName;
+
+	private String lastName;
+
+	private String userName;
+
+	private enum userStatus {
+		ACTIVE, DELETED
+	};
+
 	private Set<WorkItem> workItems = new HashSet<WorkItem>(0);
+	private Set<Team> teams = new HashSet<Team>(0);
+
+	public Set<Team> getTeams() {
+		return teams;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -66,14 +78,6 @@ public class User implements Serializable{
 		this.userName = userName;
 	}
 
-	public Enum getUserStatus() {
-		return userStatus;
-	}
-
-	public void setUserStatus(Enum userStatus) {
-		this.userStatus = userStatus;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<WorkItem> getWorkItems() {
 		return workItems;
@@ -83,8 +87,4 @@ public class User implements Serializable{
 		this.workItems = workItems;
 	}
 
-	
-	
-	
-	
 }
