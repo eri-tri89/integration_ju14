@@ -1,20 +1,20 @@
 package model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * 
- * @author Jesper Wendler
+ * @author Jesper Wendler, Pierre Vanderpol
  *
  */
 
 @Entity
-public class User implements Serializable {
-
-	
+public final class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +28,12 @@ public class User implements Serializable {
 
 	private String userName;
 
+	private UserStatus userStatus;
+	
+	public User() {
+	}
+	
+	
 //	private enum userStatus {
 //		ACTIVE, DELETED
 //	};
@@ -35,9 +41,6 @@ public class User implements Serializable {
 //	private Set<WorkItem> workItems = new HashSet<WorkItem>(0);
 //	private Set<Team> teams = new HashSet<Team>(0);
 
-//	public User() {
-//
-//	}
 	
 	
 	
@@ -49,13 +52,22 @@ public class User implements Serializable {
 //	public void setTeams(Set<Team> teams) {
 //		this.teams = teams;
 //	}
+	
 
 	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public User(String userId, String firstName, String lastName, String userName, UserStatus userStatus) {
+	this.userId = userId;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.userName = userName;
+	this.userStatus = userStatus;
+}
+
+	public User setUserId(String userId) {
+		return new User(userId,firstName,lastName,userName,userStatus);
 	}
 
 	public String getFirstName() {
@@ -82,6 +94,23 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
+
+	public UserStatus getUserStatus() {
+		return userStatus;
+	}
+
+
+	public void setUserStatus(UserStatus userStatus) {
+		this.userStatus = userStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", userStatus=" + userStatus + "]";
+	}
+
+	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 //	public Set<WorkItem> getWorkItems() {
 //		return workItems;

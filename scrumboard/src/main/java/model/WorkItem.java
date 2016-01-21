@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 /**
  * 
  * @author Jesper Wendler
- *
+ * @author Pierre Vanderpol
  */
 
 @Entity
@@ -24,15 +24,19 @@ public class WorkItem {
 	private Long id;
 	private String ItemID;
 
+	/*
 	private enum itemStatus {
 	};
+	*/
 
 	private String subject;
 	private String description;
 
+	/*
 	private enum priority {
 		URGENT, NORMAL, LOW
 	};
+	*/
 
 	private Set<Issue> issues = new HashSet<Issue>(0);
 
