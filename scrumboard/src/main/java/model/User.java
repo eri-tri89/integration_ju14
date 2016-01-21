@@ -14,9 +14,7 @@ import javax.persistence.*;
 @Entity
 public class User implements Serializable {
 
-	public User() {
-
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,21 +28,27 @@ public class User implements Serializable {
 
 	private String userName;
 
-	private enum userStatus {
-		ACTIVE, DELETED
-	};
+//	private enum userStatus {
+//		ACTIVE, DELETED
+//	};
 
-	private Set<WorkItem> workItems = new HashSet<WorkItem>(0);
-	private Set<Team> teams = new HashSet<Team>(0);
+//	private Set<WorkItem> workItems = new HashSet<WorkItem>(0);
+//	private Set<Team> teams = new HashSet<Team>(0);
 
-	public Set<Team> getTeams() {
-		return teams;
-	}
+//	public User() {
+//
+//	}
+	
+	
+	
+//	public Set<Team> getTeams() {
+//		return teams;
+//	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public void setTeams(Set<Team> teams) {
-		this.teams = teams;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+//	public void setTeams(Set<Team> teams) {
+//		this.teams = teams;
+//	}
 
 	public String getUserId() {
 		return userId;
@@ -78,13 +82,13 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<WorkItem> getWorkItems() {
-		return workItems;
-	}
-
-	public void setWorkItems(Set<WorkItem> workItems) {
-		this.workItems = workItems;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+//	public Set<WorkItem> getWorkItems() {
+//		return workItems;
+//	}
+//
+//	public void setWorkItems(Set<WorkItem> workItems) {
+//		this.workItems = workItems;
+//	}
 
 }
