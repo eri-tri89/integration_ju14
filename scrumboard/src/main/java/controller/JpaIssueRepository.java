@@ -13,28 +13,36 @@ import model.WorkItem;
 public class JpaIssueRepository implements IssueRepository {
 
 	@Override
-	public Issue saveOrUpdate(Issue entity) {
-		// TODO Auto-generated method stub
+	public Issue create(Issue entity) {
+		Issue issue = new Issue(entity.getDescription(),entity.getWorkItemId());
+		return issue;
+	}
+
+	@Override
+	public Issue update(Issue entity) {
+		
 		return null;
 	}
 
 	@Override
-	public Issue remove(Issue entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Issue assignIssueToWorkItem(String WorkItemId, String IssueID) {
-		// TODO Auto-generated method stub
+	public Issue delete(Issue entity) {
+		
 		return null;
 	}
 
 	@Override
 	public Collection<WorkItem> getAllaWorkItemWithIssue() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
+
+	@Override
+	public WorkItem addIssueToWorkItem(WorkItem WorkItem, Issue IssueID) {
+		
+		return null;
+	}
+
+	
 
 	
 }

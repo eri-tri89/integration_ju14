@@ -13,10 +13,12 @@ import model.WorkItem;
 
 public interface IssueRepository extends CrudRepository<Issue> {
 
-	// Lägga till en Issue till en work item 
-	Issue assignIssueToWorkItem(String WorkItemId, String IssueID);
-	
-	// Get all workitems with an issue 
+	// Get all Workitems with an issue 
 	Collection<WorkItem> getAllaWorkItemWithIssue();
+
+	// Adds a new Issue to a WorkItem and returns the updated WorkItem
+	WorkItem addIssueToWorkItem(WorkItem WorkItem, Issue IssueID);
+	
+	
 	
 }
