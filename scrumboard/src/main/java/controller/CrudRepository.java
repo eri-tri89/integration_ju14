@@ -1,7 +1,7 @@
 package controller;
 
 /**
- * 
+ * Common Crud operations shared by all repositories. 
  * @author Pierre Vanderpol
  *
  */
