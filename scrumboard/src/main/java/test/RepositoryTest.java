@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Collection;
+
 import controller.JpaIssueRepository;
 import controller.JpaTeamRepository;
 import controller.JpaUserRepository;
@@ -29,53 +31,68 @@ public class RepositoryTest {
 			
 			// CREATE
 			System.out.println("Create first User");
-			User usr1 = new User("1","Bob","Builder","Boby123",UserStatus.ACTIVE);
+			User usr1 = new User("Bob","Builder","Boby123");
 			testUser.create(usr1);
 			System.out.println(usr1.toString());
 			System.out.println("");
 			
-			System.out.println("Create first User");
-			User usr2 = new User("2","Anna","Johasson","anna789",UserStatus.ACTIVE);
+			System.out.println("Create User2");
+			User usr2 = new User("Anna","Johasson","anna789");
 			testUser.create(usr2);
 			System.out.println(usr2.toString());
 			System.out.println("");
 			
-			// UPDATE
+			// UPDATE & DELETE
 			System.out.println("Update User 2");
-			testUser.update(new User("rwerer678b7iaysud","Anna","Johasson-Benett","anna789",UserStatus.ACTIVE));
+			usr2.setUserStatus(UserStatus.DELETED);
+			testUser.update(usr2);
 			System.out.println(usr2.toString());
 			System.out.println("");
 			
+			
 			// GET BY ID
-			User usr = new User();
-			usr = testUser.getUserById("1");
-			System.out.println(usr);
+			System.out.println("Get by ID");
+			System.out.println(testUser.getUserById(usr2.getUserId()));
 			System.out.println("");
+			
 			
 			// GET BY FIRSTNAME
-			usr = testUser.getUserByFirstName("Bob");
-			System.out.println("By FirstName "+usr);
+			System.out.println("Get by Firstname");
+			System.out.println(testUser.getUserByFirstName("Bob").toString());
 			System.out.println("");
+			
 			
 			// GET BY LASTNAME
-			usr = testUser.getUserByLastName("Johasson-Benett");
-			System.out.println("By LastName "+usr);
+			System.out.println("Get by Lastname");
+			System.out.println("By LastName "+testUser.getUserByLastName("Johasson"));
 			System.out.println("");
 			
+			
 			// GET BY USERNAME
-			usr = testUser.getUserByUserName("anna789");
-			System.out.println("By Username "+usr);
+			System.out.println("Get by Username");
+			System.out.println("By Username "+testUser.getUserByUserName("anna789"));
 			System.out.println("");
+			
 			
 			// DELETE
 			System.out.println("Delete User 2");
 			testUser.delete(usr2);
-			System.out.println("null is user deleted : " + usr2.getFirstName());
+			System.out.println("null is user deleted : " + usr2.getFirstName() +" " + usr2.getUserStatus());
 			
+			// GET ALL USERS
+			System.out.println("Get all users");
+			Collection<User> userList = testUser.getAllUser();
+			
+			for(User u : userList){
+				System.out.println(u.toString());
+			}
+			
+			/*
 			// ====================================================
 			// TEST CLASS JpaTeamRepository
 			// ====================================================
-
+*/
+			/*
 			System.out.println("==================================================== TEST ====================================================");
 			JpaTeamRepository test = new JpaTeamRepository();
 
@@ -132,7 +149,7 @@ public class RepositoryTest {
 			System.out.println("");
 			System.out.println("==================================================== NEXT TEST ====================================================");
 			
-			
+			*/
 		}
 
 	

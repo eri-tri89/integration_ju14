@@ -16,58 +16,44 @@ import javax.persistence.Id;
 @Entity
 public final class User implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
 	private String userId;
-
 	private String firstName;
-
 	private String lastName;
-
 	private String userName;
-
 	private UserStatus userStatus;
 	
 	public User() {
 	}
 	
-	
-//	private enum userStatus {
-//		ACTIVE, DELETED
-//	};
-
-//	private Set<WorkItem> workItems = new HashSet<WorkItem>(0);
-//	private Set<Team> teams = new HashSet<Team>(0);
-
-	
-	
-	
-//	public Set<Team> getTeams() {
-//		return teams;
-//	}
-
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-//	public void setTeams(Set<Team> teams) {
-//		this.teams = teams;
-//	}
-	
-
 	public String getUserId() {
 		return userId;
 	}
+	
+//	////// REMOVE //////
+//	public User setId(Long id) {
+//		this.id = id;
+//		return new User(id,firstName,lastName,userName);
+//	}
+//	
+//	public Long getId() {
+//		return this.id;
+//	}
+//	
 
-	public User(String userId, String firstName, String lastName, String userName, UserStatus userStatus) {
-	this.userId = userId;
+	public User(String firstName, String lastName, String userName) {
+	this.userId = "";
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.userName = userName;
-	this.userStatus = userStatus;
+	this.userStatus = UserStatus.ACTIVE;
 }
 
 	public User setUserId(String userId) {
-		return new User(userId,firstName,lastName,userName,userStatus);
+		this.userId = userId;
+		return new User(firstName,lastName,userName);
 	}
 
 	public String getFirstName() {

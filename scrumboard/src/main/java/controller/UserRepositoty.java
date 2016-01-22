@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Collection;
+
 import model.User;
 
 public interface UserRepositoty extends CrudRepository<User> {
@@ -11,4 +13,6 @@ public interface UserRepositoty extends CrudRepository<User> {
 	User getUserByLastName(String LastName);
 
 	User getUserByUserName(String UserName);
+	
+	Collection<User> getAllUser();
 }

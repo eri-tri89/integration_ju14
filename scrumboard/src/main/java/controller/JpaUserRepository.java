@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import model.User;
 import model.UserStatus;
@@ -17,7 +19,8 @@ public final class JpaUserRepository implements UserRepositoty {
 
 	   // JUST FOR TEST REMOVE IT LATER
 		private final Map<String, User> users = new HashMap<>();
-	
+		//private static final AtomicLong userIds = new AtomicLong();
+		
 		/**
 		 * Creates a new User object in the database and gives it an ID
 		 * 
@@ -26,8 +29,9 @@ public final class JpaUserRepository implements UserRepositoty {
 		 */
 		@Override
 		public User create(User entity) {
-			String id = UUID.randomUUID().toString();
+			String id = UUID.randomUUID().toString(); 
 			entity = entity.setUserId(id);
+			
 			// CHANGE THIS LATER TO GET RESULT FROM DATABASE
 			users.put(id, entity);
 			//
@@ -60,7 +64,7 @@ public final class JpaUserRepository implements UserRepositoty {
 			// CHANGE TO DATABASE
 			if (users.get(entity.getUserId()) != null) {
 				entity.setUserStatus(UserStatus.DELETED);
-				users.put(entity.getUserId(),entity);
+				// users.put(entity.getUserId(),entity);
 				return entity;
 				}else{
 				return null;
@@ -84,7 +88,17 @@ public final class JpaUserRepository implements UserRepositoty {
 			}
 		}
 
-	
+		
+		/**
+		 * Get all user object
+		 * 
+		 * @return returns Collection of User
+		 */
+		@Override
+		public Collection<User> getAllUser() {
+			return users.values();
+		}
+
 		/**
 		 * Get an existing User object in the database by firstName
 		 * 
@@ -96,10 +110,10 @@ public final class JpaUserRepository implements UserRepositoty {
 			Collection<User> usr = users.values();
 			for(User u : usr){
 				if(u.getFirstName().equals(firstName)){
+					System.out.println("inside collection"+u.toString());
 					return u;
 				}
 			}
-			
 			return null;
 		}
 
@@ -138,6 +152,5 @@ public final class JpaUserRepository implements UserRepositoty {
 			}
 			return null;
 		}
-		
 
 }
