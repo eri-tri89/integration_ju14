@@ -33,7 +33,7 @@ public class UserService {
 	}
 	
 	/**
-	 * Updates an user
+	 * Updates the user's data
 	 * @param userId the id of the User
 	 * @param user the JSON object to be converted to a user object
 	 * @return the modified user object produced as an JSON object
@@ -41,6 +41,7 @@ public class UserService {
 	@PUT
 	@Path("{id}")
 	public User updateUser(@PathParam("id")String userId,User user){
+		//User object as a param or QueryParam? only some data will be changed here.
 		return null;
 	}
 	
