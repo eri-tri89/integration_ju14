@@ -31,20 +31,9 @@ public final class User implements Serializable {
 	public String getUserId() {
 		return userId;
 	}
-	
-//	////// REMOVE //////
-//	public User setId(Long id) {
-//		this.id = id;
-//		return new User(id,firstName,lastName,userName);
-//	}
-//	
-//	public Long getId() {
-//		return this.id;
-//	}
-//	
 
-	public User(String firstName, String lastName, String userName) {
-	this.userId = "";
+	public User(String userId,String firstName, String lastName, String userName) {
+	this.userId = userId;
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.userName = userName;
@@ -53,7 +42,7 @@ public final class User implements Serializable {
 
 	public User setUserId(String userId) {
 		this.userId = userId;
-		return new User(firstName,lastName,userName);
+		return new User(userId,this.firstName,this.lastName,this.userName);
 	}
 
 	public String getFirstName() {

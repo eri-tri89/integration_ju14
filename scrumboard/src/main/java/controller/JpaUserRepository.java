@@ -34,7 +34,8 @@ public final class JpaUserRepository implements UserRepositoty {
 			
 			// CHANGE THIS LATER TO GET RESULT FROM DATABASE
 			users.put(id, entity);
-			//
+			
+			System.out.println(users.get(id).getUserId());
 			return entity;
 		}
 
