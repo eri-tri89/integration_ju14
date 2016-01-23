@@ -40,7 +40,10 @@ public class UserService {
 	 * */
 	@PUT
 	@Path("{id}")
+
+
 	public Users updateUser(@PathParam("id")String userId,Users user){
+
 		//User object as a param or QueryParam? only some data will be changed here.
 		return null;
 	}
