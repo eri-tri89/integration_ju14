@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -34,12 +35,22 @@ public class TeamService {
 	}
 	
 	/**
-	 * Updates a team
+	 * Updates a team's information
 	 * @param teamID the id of the team to be updated
 	 * */
 	@PUT
 	@Path("{id}")
-	public Response updateTeam(@PathParam("id")String teamID){
+	public Response updateTeamInfo(@PathParam("id")String teamID){
+		return null;
+	}
+	
+	/**
+	 * Adds a new member to a team
+	 * @param teamID the id of the team to be updated
+	 * */
+	@POST
+	@Path("{id}")
+	public Response addMembertoTeam(@PathParam("id")String teamID,@QueryParam("userID")String userId){
 		return null;
 	}
 	
