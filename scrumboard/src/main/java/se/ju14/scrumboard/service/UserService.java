@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.User;
+import model.Users;
 /**
  * This class manages the user functions and service
  * @author Erik Pérez
@@ -40,7 +40,7 @@ public class UserService {
 	 * */
 	@PUT
 	@Path("{id}")
-	public User updateUser(@PathParam("id")String userId,User user){
+	public Users updateUser(@PathParam("id")String userId,Users user){
 		//User object as a param or QueryParam? only some data will be changed here.
 		return null;
 	}
