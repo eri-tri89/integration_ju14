@@ -7,7 +7,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import model.User;
+import model.Users;
 import model.UserStatus;
 
 /**
@@ -18,7 +18,7 @@ import model.UserStatus;
 public final class JpaUserRepository implements UserRepositoty {
 
 	   // JUST FOR TEST REMOVE IT LATER
-		private final Map<String, User> users = new HashMap<>();
+		private final Map<String, Users> users = new HashMap<>();
 		//private static final AtomicLong userIds = new AtomicLong();
 		
 		/**
@@ -28,12 +28,12 @@ public final class JpaUserRepository implements UserRepositoty {
 		 * @return returns a newly created User object
 		 */
 		@Override
-		public User create(User entity) {
+		public Users create(Users entity) {
 			String id = UUID.randomUUID().toString(); 
 			entity = entity.setUserId(id);
 			
 			// CHANGE THIS LATER TO GET RESULT FROM DATABASE
-			users.put(id, entity);
+			//users.put(id, entity);
 			//
 			return entity;
 		}
@@ -46,7 +46,7 @@ public final class JpaUserRepository implements UserRepositoty {
 		 * @return returns the updated User object
 		 */
 		@Override
-		public User update(User entity) {
+		public Users update(Users entity) {
 			users.put(entity.getUserId(), entity);
 			return entity;
 		}
@@ -59,7 +59,7 @@ public final class JpaUserRepository implements UserRepositoty {
 		 * @return returns the updated User object
 		 */
 		@Override
-		public User delete(User entity) {
+		public Users delete(Users entity) {
 			
 			// CHANGE TO DATABASE
 			if (users.get(entity.getUserId()) != null) {
@@ -79,7 +79,7 @@ public final class JpaUserRepository implements UserRepositoty {
 		 * @return returns the corresponding User object
 		 */
 		@Override
-		public User getUserById(String userId) {
+		public Users getUserById(String userId) {
 			
 			if (users.get(userId) != null) {
 				return users.get(userId);
@@ -95,7 +95,7 @@ public final class JpaUserRepository implements UserRepositoty {
 		 * @return returns Collection of User
 		 */
 		@Override
-		public Collection<User> getAllUser() {
+		public Collection<Users> getAllUser() {
 			return users.values();
 		}
 
@@ -106,9 +106,9 @@ public final class JpaUserRepository implements UserRepositoty {
 		 * @return returns the corresponding User object
 		 */
 		@Override
-		public User getUserByFirstName(String firstName) {
-			Collection<User> usr = users.values();
-			for(User u : usr){
+		public Users getUserByFirstName(String firstName) {
+			Collection<Users> usr = users.values();
+			for(Users u : usr){
 				if(u.getFirstName().equals(firstName)){
 					System.out.println("inside collection"+u.toString());
 					return u;
@@ -125,9 +125,9 @@ public final class JpaUserRepository implements UserRepositoty {
 		 */
 		
 		@Override
-		public User getUserByLastName(String LastName) {
-			Collection<User> usr = users.values();
-			for(User u : usr){
+		public Users getUserByLastName(String LastName) {
+			Collection<Users> usr = users.values();
+			for(Users u : usr){
 				if(u.getLastName().equals(LastName)){
 					return u;
 				}
@@ -143,9 +143,9 @@ public final class JpaUserRepository implements UserRepositoty {
 		 */
 		
 		@Override
-		public User getUserByUserName(String UserName) {
-			Collection<User> usr = users.values();
-			for(User u : usr){
+		public Users getUserByUserName(String UserName) {
+			Collection<Users> usr = users.values();
+			for(Users u : usr){
 				if(u.getUserName().equals(UserName)){
 					return u;
 				}

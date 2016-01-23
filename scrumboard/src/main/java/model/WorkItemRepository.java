@@ -10,13 +10,13 @@ import controller.CrudRepository;
  */
 public interface WorkItemRepository extends CrudRepository<WorkItem> {
 
-	WorkItem asignWorkItemToUser(User user, String WorkItemId);
+	WorkItem asignWorkItemToUser(Users user, String WorkItemId);
 	
 	Collection<WorkItem> getWorkItemsByStatus(IssueStatus issueStatus);
 
 	Collection<WorkItem> getWorkItemsByTeam(Team team);
 	
-	Collection<WorkItem> getWorkItemsByUser(User user);
+	Collection<WorkItem> getWorkItemsByUser(Users user);
 	
 	Collection<WorkItem> getWorkItemsByWord(String word);
 	

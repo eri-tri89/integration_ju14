@@ -1,11 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * 
@@ -14,10 +17,14 @@ import javax.persistence.Id;
  */
 
 @Entity
-public final class User implements Serializable {
+public class Users implements Serializable {
 
-	// @Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String userId;
 	private String firstName;
@@ -25,7 +32,7 @@ public final class User implements Serializable {
 	private String userName;
 	private UserStatus userStatus;
 	
-	public User() {
+	public Users() {
 	}
 	
 	public String getUserId() {
@@ -43,7 +50,7 @@ public final class User implements Serializable {
 //	}
 //	
 
-	public User(String firstName, String lastName, String userName) {
+	public Users(String firstName, String lastName, String userName) {
 	this.userId = "";
 	this.firstName = firstName;
 	this.lastName = lastName;
@@ -51,9 +58,9 @@ public final class User implements Serializable {
 	this.userStatus = UserStatus.ACTIVE;
 }
 
-	public User setUserId(String userId) {
+	public Users setUserId(String userId) {
 		this.userId = userId;
-		return new User(firstName,lastName,userName);
+		return new Users(firstName,lastName,userName);
 	}
 
 	public String getFirstName() {
@@ -97,13 +104,13 @@ public final class User implements Serializable {
 	}
 
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-//	public Set<WorkItem> getWorkItems() {
-//		return workItems;
-//	}
-//
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	public Set<WorkItem> getWorkItems() {
+		return getWorkItems();
+	}
+
 //	public void setWorkItems(Set<WorkItem> workItems) {
-//		this.workItems = workItems;
+//		this.workItems = workItems();
 //	}
 
 }

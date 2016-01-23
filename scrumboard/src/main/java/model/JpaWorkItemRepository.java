@@ -34,7 +34,7 @@ public final class JpaWorkItemRepository implements WorkItemRepository {
 	}
 
 	@Override
-	public WorkItem asignWorkItemToUser(User user, String WorkItemId) {
+	public WorkItem asignWorkItemToUser(Users user, String WorkItemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -52,7 +52,7 @@ public final class JpaWorkItemRepository implements WorkItemRepository {
 	}
 
 	@Override
-	public Collection<WorkItem> getWorkItemsByUser(User user) {
+	public Collection<WorkItem> getWorkItemsByUser(Users user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -2,17 +2,17 @@ package controller;
 
 import java.util.Collection;
 
-import model.User;
+import model.Users;
 
-public interface UserRepositoty extends CrudRepository<User> {
+public interface UserRepositoty extends CrudRepository<Users> {
 
-	User getUserById(String userId);
+	Users getUserById(String userId);
 
-	User getUserByFirstName(String firstName);
+	Users getUserByFirstName(String firstName);
 	
-	User getUserByLastName(String LastName);
+	Users getUserByLastName(String LastName);
 
-	User getUserByUserName(String UserName);
+	Users getUserByUserName(String UserName);
 	
-	Collection<User> getAllUser();
+	Collection<Users> getAllUser();
 }

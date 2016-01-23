@@ -9,7 +9,7 @@ import model.Issue;
 import model.IssueStatus;
 import model.Team;
 import model.TeamStatus;
-import model.User;
+import model.Users;
 import model.UserStatus;
 
 
@@ -31,13 +31,13 @@ public class RepositoryTest {
 			
 			// CREATE
 			System.out.println("Create first User");
-			User usr1 = new User("Bob","Builder","Boby123");
+			Users usr1 = new Users("Bob","Builder","Boby123");
 			testUser.create(usr1);
 			System.out.println(usr1.toString());
 			System.out.println("");
 			
 			System.out.println("Create User2");
-			User usr2 = new User("Anna","Johasson","anna789");
+			Users usr2 = new Users("Anna","Johasson","anna789");
 			testUser.create(usr2);
 			System.out.println(usr2.toString());
 			System.out.println("");
@@ -81,9 +81,9 @@ public class RepositoryTest {
 			
 			// GET ALL USERS
 			System.out.println("Get all users");
-			Collection<User> userList = testUser.getAllUser();
+			Collection<Users> userList = testUser.getAllUser();
 			
-			for(User u : userList){
+			for(Users u : userList){
 				System.out.println(u.toString());
 			}
 			

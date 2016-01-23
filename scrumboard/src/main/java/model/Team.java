@@ -24,7 +24,7 @@ public final class Team {
 	private Long id;
 	private String teamID;
 	private String name;
-	private Set<User> users = new HashSet<User>(0);
+	private Set<Users> users = new HashSet<Users>(0);
 	private TeamStatus teamStatus;
 	/* 
 	private enum teamStatus {
@@ -35,7 +35,7 @@ public final class Team {
 	public Team(){
 	}
 
-	public Team(String teamID, String name, TeamStatus teamStatus,Set<User> users) {
+	public Team(String teamID, String name, TeamStatus teamStatus,Set<Users> users) {
 		this.teamID = teamID;
 		this.name = name;
 		this.users = users;
@@ -69,12 +69,12 @@ public final class Team {
 	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
-	public Set<User> getUsers() {
+	public Set<Users> getUsers() {
 		return users;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
-	public void setUsers(Set<User> users) {
+	public void setUsers(Set<Users> users) {
 		this.users = users;
 	}
 

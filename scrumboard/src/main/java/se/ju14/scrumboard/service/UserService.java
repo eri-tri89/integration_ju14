@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.User;
+import model.Users;
 /**
  * This class manages the user functions and service
  * @author Erik Pérez
@@ -28,7 +28,7 @@ public class UserService {
 	 * @return a response 200 if it creates successfully, 404 otherwise
 	 * */	
 	@POST
-	public Response createUser(User user){
+	public Response createUser(Users user){
 		return null;
 	}
 	
@@ -40,7 +40,7 @@ public class UserService {
 	 * */
 	@PUT
 	@Path("{id}")
-	public User updateUser(@PathParam("id")String userId,User user){
+	public Users updateUser(@PathParam("id")String userId,Users user){
 		return null;
 	}
 	
@@ -62,7 +62,7 @@ public class UserService {
 	 * */
 	@GET
 	@Path("{id}")
-	public User getUserById(@PathParam("id")String userId){
+	public Users getUserById(@PathParam("id")String userId){
 		return null;
 	}
 	
@@ -72,7 +72,7 @@ public class UserService {
 	 * @return The User object to be found by its team id
 	 * */
 	@GET
-	public User getUserByTeamId(@QueryParam("teamID")@DefaultValue("no_team") String teamId){
+	public Users getUserByTeamId(@QueryParam("teamID")@DefaultValue("no_team") String teamId){
 		return null;
 	}
 }
