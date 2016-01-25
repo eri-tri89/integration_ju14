@@ -3,7 +3,7 @@ package controller;
 import java.util.Collection;
 
 import model.Team;
-import model.User;
+import model.Users;
 
 /**
  * Crud operations specific to Team.
@@ -17,7 +17,7 @@ public interface TeamRepository extends CrudRepository<Team> {
 	Collection<Team> getAllTeams();
 
 	// Lägg till en user till ett team
-	Collection<User> getAllTeamMembers(Team team);
+	Collection<Users> getAllTeamMembers(Team team);
 	
 	
 	

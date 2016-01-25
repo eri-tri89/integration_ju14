@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import model.Team;
 import model.TeamStatus;
-import model.User;
+import model.Users;
 
 /**
  * 
@@ -76,7 +76,7 @@ public final class JpaTeamRepository implements TeamRepository {
 
 	//////////////////////// TO DO  ////////////////////////
 	@Override
-	public Collection<User> getAllTeamMembers(Team team) {
+	public Collection<Users> getAllTeamMembers(Team team) {
 		// TODO Auto-generated method stub
 		return null;
 	}

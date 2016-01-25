@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import model.User;
+import model.Users;
 
 public class Main {
 
@@ -27,11 +27,12 @@ public class Main {
 	    // create new person
 	   
 	    em.getTransaction().begin();
-	    User user = new User();
+	    Users user = new Users();
+	    user.setUserId("1");
 	    user.setFirstName("Anna");
 	    user.setLastName("Johansson");
 	    em.persist(user);
-	   // em.getTransaction().commit();
+	    em.getTransaction().commit();
 	    
 	    em.close();
 	    

@@ -13,7 +13,7 @@ import model.Issue;
  * This class manages the Issue functions and service
  * @author Erik Pérez
  * */
-@Path("workitem/{id}/issue")
+@Path("/issue")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class IssueService {
