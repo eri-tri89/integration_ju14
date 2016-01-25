@@ -1,8 +1,8 @@
-package controller;
+package se.ju14.scrumboard.controller;
 
 import javax.ws.rs.core.Response;
 
-import model.Issue;
+import se.ju14.scrumboard.model.Issue;
 
 /**
  * Common Crud operations shared by all repositories. 

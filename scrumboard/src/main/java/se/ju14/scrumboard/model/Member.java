@@ -1,23 +1,22 @@
-package model;
+package se.ju14.scrumboard.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  * 
- * @author Jesper Wendler, Pierre Vanderpol
+ * @author Jesper Wendler, Pierre Vanderpol, Erik Perez
  *
  */
 
 @Entity
-public class Users implements Serializable {
+public class Member implements Serializable {
 
 	/**
 	 * 
@@ -26,41 +25,32 @@ public class Users implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String userId;
+	private String memberId;
 	private String firstName;
 	private String lastName;
 	private String userName;
-	private UserStatus userStatus;
-	
-	public Users() {
-	}
-	
-	public String getUserId() {
-		return userId;
-	}
-	
-//	////// REMOVE //////
-//	public User setId(Long id) {
-//		this.id = id;
-//		return new User(id,firstName,lastName,userName);
-//	}
-//	
-//	public Long getId() {
-//		return this.id;
-//	}
-//	
+	@Enumerated(EnumType.STRING)
+	private MemberStatus memberStatus;
+//	private Set<WorkItem> workItems;
 
-	public Users(String firstName, String lastName, String userName) {
-	this.userId = "";
-	this.firstName = firstName;
-	this.lastName = lastName;
-	this.userName = userName;
-	this.userStatus = UserStatus.ACTIVE;
-}
+	public Member() {
+	}
 
-	public Users setUserId(String userId) {
-		this.userId = userId;
-		return new Users(firstName,lastName,userName);
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public Member(String firstName, String lastName, String userName) {
+		this.memberId = "";
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.memberStatus = MemberStatus.ACTIVE;
+	}
+
+	public Member setMemberId(String userId) {
+		this.memberId = userId;
+		return new Member(firstName, lastName, userName);
 	}
 
 	public String getFirstName() {
@@ -87,30 +77,35 @@ public class Users implements Serializable {
 		this.userName = userName;
 	}
 
-
-	public UserStatus getUserStatus() {
-		return userStatus;
+	public MemberStatus getUserStatus() {
+		return memberStatus;
 	}
 
-
-	public void setUserStatus(UserStatus userStatus) {
-		this.userStatus = userStatus;
+	public void setUserStatus(MemberStatus memberStatus) {
+		this.memberStatus = memberStatus;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", userName=" + userName + ", userStatus=" + userStatus + "]";
+		return "User [id=" + id + ", userId=" + memberId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", userStatus=" + memberStatus + "]";
 	}
 
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	/*
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
 	public Set<WorkItem> getWorkItems() {
 		return getWorkItems();
 	}
 
-//	public void setWorkItems(Set<WorkItem> workItems) {
-//		this.workItems = workItems();
-//	}
+
+	public void setWorkItems(Set<WorkItem> workItems) {
+		this.workItems = workItems;
+	}
+*/
+
+	
+	public long getId() {
+		return id;
+	}
 
 }

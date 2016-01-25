@@ -1,4 +1,4 @@
-package model;
+package se.ju14.scrumboard.model;
 
 import java.util.Collection;
 
@@ -34,7 +34,7 @@ public final class JpaWorkItemRepository implements WorkItemRepository {
 	}
 
 	@Override
-	public WorkItem asignWorkItemToUser(Users user, String WorkItemId) {
+	public WorkItem asignWorkItemToUser(Member user, String WorkItemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -52,7 +52,7 @@ public final class JpaWorkItemRepository implements WorkItemRepository {
 	}
 
 	@Override
-	public Collection<WorkItem> getWorkItemsByUser(Users user) {
+	public Collection<WorkItem> getWorkItemsByUser(Member user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

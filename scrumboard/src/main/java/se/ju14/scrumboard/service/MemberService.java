@@ -1,4 +1,4 @@
-package se.ju14.scrumboard.service;
+  package se.ju14.scrumboard.service;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.Users;
+import se.ju14.scrumboard.model.Member;
 /**
  * This class manages the user functions and service
  * @author Erik Pérez
@@ -21,14 +21,14 @@ import model.Users;
 @Path("/user")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class UserService {
+public class MemberService {
 	/**
 	 * Creates a new user 
 	 * @param user the JSON object to be converted to a user object
 	 * @return a response 200 if it creates successfully, 404 otherwise
 	 * */	
 	@POST
-	public Response createUser(Users user){
+	public Response createUser(Member user){
 		return null;
 	}
 	
@@ -40,7 +40,7 @@ public class UserService {
 	 * */
 	@PUT
 	@Path("{id}")
-	public Users updateUser(@PathParam("id")String userId,Users user){
+	public Member updateUser(@PathParam("id")String userId,Member user){
 		//User object as a param or QueryParam? only some data will be changed here.
 		return null;
 	}
@@ -63,7 +63,7 @@ public class UserService {
 	 * */
 	@GET
 	@Path("{id}")
-	public Users getUserById(@PathParam("id")String userId){
+	public Member getUserById(@PathParam("id")String userId){
 		return null;
 	}
 	
@@ -73,7 +73,7 @@ public class UserService {
 	 * @return The User object to be found by its team id
 	 * */
 	@GET
-	public Users getUserByTeamId(@QueryParam("teamID")@DefaultValue("no_team") String teamId){
+	public Member getUserByTeamId(@QueryParam("teamID")@DefaultValue("no_team") String teamId){
 		return null;
 	}
 }

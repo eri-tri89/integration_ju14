@@ -1,9 +1,9 @@
-package controller;
+package se.ju14.scrumboard.controller;
 
 import java.util.Collection;
 
-import model.Issue;
-import model.WorkItem;
+import se.ju14.scrumboard.model.Issue;
+import se.ju14.scrumboard.model.WorkItem;
 
 /**
  * Crud operations specific to Issues.

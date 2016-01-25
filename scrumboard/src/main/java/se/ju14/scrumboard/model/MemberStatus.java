@@ -1,6 +1,6 @@
-package model;
+package se.ju14.scrumboard.model;
 
-public enum UserStatus {
+public enum MemberStatus {
 	ACTIVE, 
 	DELETED
 }

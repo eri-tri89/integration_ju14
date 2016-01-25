@@ -1,14 +1,12 @@
-package model;
+package se.ju14.scrumboard.model;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  * 
@@ -24,21 +22,19 @@ public final class Team {
 	private Long id;
 	private String teamID;
 	private String name;
-	private Set<Users> users = new HashSet<Users>(0);
+	private Set<Member> member = new HashSet<Member>(0);
 	private TeamStatus teamStatus;
-	/* 
-	private enum teamStatus {
-		ACTIVE, DELETED
-	};
-	*/
-	
-	public Team(){
+	/*
+	 * private enum teamStatus { ACTIVE, DELETED };
+	 */
+
+	public Team() {
 	}
 
-	public Team(String teamID, String name, TeamStatus teamStatus,Set<Users> users) {
+	public Team(String teamID, String name, TeamStatus teamStatus, Set<Member> member) {
 		this.teamID = teamID;
 		this.name = name;
-		this.users = users;
+		this.member = member;
 		this.teamStatus = teamStatus;
 	}
 
@@ -47,7 +43,7 @@ public final class Team {
 	}
 
 	public Team setTeamID(String teamID) {
-		return new Team(teamID,name,teamStatus,users);
+		return new Team(teamID, name, teamStatus, member);
 	}
 
 	public String getName() {
@@ -62,30 +58,24 @@ public final class Team {
 		return teamStatus;
 	}
 
-
 	public void setTeamStatus(TeamStatus teamStatus) {
 		this.teamStatus = teamStatus;
 	}
-	
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
-	public Set<Users> getUsers() {
-		return users;
+
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+	public Set<Member> getUsers() {
+		return member;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
-	public void setUsers(Set<Users> users) {
-		this.users = users;
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+	public void setUsers(Set<Member> member) {
+		this.member = member;
 	}
 
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", teamID=" + teamID + ", name=" + name + ", users=" + users + ", teamStatus="
+		return "Team [id=" + id + ", teamID=" + teamID + ", name=" + name + ", users=" + member + ", teamStatus="
 				+ teamStatus + "]";
 	}
-	
-	
-	
-	
 
 }

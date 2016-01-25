@@ -12,7 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.WorkItem;
+import se.ju14.scrumboard.model.WorkItem;
 
 /**
  * This class manages the workitem functions and service

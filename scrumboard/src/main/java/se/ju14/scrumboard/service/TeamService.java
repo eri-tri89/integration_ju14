@@ -14,7 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.Team;
+import se.ju14.scrumboard.model.Team;
 /**
  * This class manages the team functions and service
  * @author Erik Pérez

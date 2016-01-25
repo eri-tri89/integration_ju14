@@ -1,18 +1,18 @@
-package controller;
+package se.ju14.scrumboard.controller;
 
 import java.util.Collection;
 
-import model.Users;
+import se.ju14.scrumboard.model.Member;
 
-public interface UserRepositoty extends CrudRepository<Users> {
+public interface MemberRepository extends CrudRepository<Member> {
 
-	Users getUserById(String userId);
+	Member getUserById(String userId);
 
-	Users getUserByFirstName(String firstName);
+	Member getUserByFirstName(String firstName);
 	
-	Users getUserByLastName(String LastName);
+	Member getUserByLastName(String LastName);
 
-	Users getUserByUserName(String UserName);
+	Member getUserByUserName(String UserName);
 	
-	Collection<Users> getAllUser();
+	Collection<Member> getAllUser();
 }

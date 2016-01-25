@@ -7,7 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import model.Issue;
+import se.ju14.scrumboard.model.Issue;
 
 /**
  * This class manages the Issue functions and service

@@ -1,8 +1,8 @@
-package model;
+package se.ju14.scrumboard.model;
 
 import java.util.Collection;
 
-import controller.CrudRepository;
+import se.ju14.scrumboard.controller.CrudRepository;
 /**
  * 
  * @author Pierre Vanderpol
@@ -10,13 +10,13 @@ import controller.CrudRepository;
  */
 public interface WorkItemRepository extends CrudRepository<WorkItem> {
 
-	WorkItem asignWorkItemToUser(Users user, String WorkItemId);
+	WorkItem asignWorkItemToUser(Member user, String WorkItemId);
 	
 	Collection<WorkItem> getWorkItemsByStatus(IssueStatus issueStatus);
 
 	Collection<WorkItem> getWorkItemsByTeam(Team team);
 	
-	Collection<WorkItem> getWorkItemsByUser(Users user);
+	Collection<WorkItem> getWorkItemsByUser(Member user);
 	
 	Collection<WorkItem> getWorkItemsByWord(String word);
 	

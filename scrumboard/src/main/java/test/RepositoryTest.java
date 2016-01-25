@@ -2,15 +2,15 @@ package test;
 
 import java.util.Collection;
 
-import controller.JpaIssueRepository;
-import controller.JpaTeamRepository;
-import controller.JpaUserRepository;
-import model.Issue;
-import model.IssueStatus;
-import model.Team;
-import model.TeamStatus;
-import model.Users;
-import model.UserStatus;
+import se.ju14.scrumboard.controller.JpaIssueRepository;
+import se.ju14.scrumboard.controller.JpaTeamRepository;
+import se.ju14.scrumboard.controller.JpaMemberRepository;
+import se.ju14.scrumboard.model.Issue;
+import se.ju14.scrumboard.model.IssueStatus;
+import se.ju14.scrumboard.model.Team;
+import se.ju14.scrumboard.model.TeamStatus;
+import se.ju14.scrumboard.model.MemberStatus;
+import se.ju14.scrumboard.model.Member;
 
 
 /**
@@ -27,24 +27,24 @@ public class RepositoryTest {
 			// ====================================================
 
 			System.out.println("==================================================== TEST ====================================================");
-			JpaUserRepository testUser = new JpaUserRepository();
+			JpaMemberRepository testUser = new JpaMemberRepository();
 			
 			// CREATE
 			System.out.println("Create first User");
-			Users usr1 = new Users("Bob","Builder","Boby123");
+			Member usr1 = new Member("Bob","Builder","Boby123");
 			testUser.create(usr1);
 			System.out.println(usr1.toString());
 			System.out.println("");
 			
 			System.out.println("Create User2");
-			Users usr2 = new Users("Anna","Johasson","anna789");
+			Member usr2 = new Member("Anna","Johasson","anna789");
 			testUser.create(usr2);
 			System.out.println(usr2.toString());
 			System.out.println("");
 			
 			// UPDATE & DELETE
 			System.out.println("Update User 2");
-			usr2.setUserStatus(UserStatus.DELETED);
+			usr2.setUserStatus(MemberStatus.DELETED);
 			testUser.update(usr2);
 			System.out.println(usr2.toString());
 			System.out.println("");
@@ -52,7 +52,7 @@ public class RepositoryTest {
 			
 			// GET BY ID
 			System.out.println("Get by ID");
-			System.out.println(testUser.getUserById(usr2.getUserId()));
+			System.out.println(testUser.getUserById(usr2.getMemberId()));
 			System.out.println("");
 			
 			
@@ -81,9 +81,9 @@ public class RepositoryTest {
 			
 			// GET ALL USERS
 			System.out.println("Get all users");
-			Collection<Users> userList = testUser.getAllUser();
+			Collection<Member> userList = testUser.getAllUser();
 			
-			for(Users u : userList){
+			for(Member u : userList){
 				System.out.println(u.toString());
 			}
 			

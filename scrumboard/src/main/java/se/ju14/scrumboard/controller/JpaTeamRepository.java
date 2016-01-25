@@ -1,13 +1,13 @@
-package controller;
+package se.ju14.scrumboard.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import model.Team;
-import model.TeamStatus;
-import model.Users;
+import se.ju14.scrumboard.model.Team;
+import se.ju14.scrumboard.model.TeamStatus;
+import se.ju14.scrumboard.model.Member;
 
 /**
  * 
@@ -76,7 +76,7 @@ public final class JpaTeamRepository implements TeamRepository {
 
 	//////////////////////// TO DO  ////////////////////////
 	@Override
-	public Collection<Users> getAllTeamMembers(Team team) {
+	public Collection<Member> getAllTeamMembers(Team team) {
 		// TODO Auto-generated method stub
 		return null;
 	}

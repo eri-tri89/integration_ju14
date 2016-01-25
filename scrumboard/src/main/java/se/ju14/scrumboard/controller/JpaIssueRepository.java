@@ -1,13 +1,13 @@
-package controller;
+package se.ju14.scrumboard.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import model.Issue;
-import model.IssueStatus;
-import model.WorkItem;
+import se.ju14.scrumboard.model.Issue;
+import se.ju14.scrumboard.model.IssueStatus;
+import se.ju14.scrumboard.model.WorkItem;
 
 /**
  * Implements CRUD operations and database transactions for "Issues" objects.

@@ -1,4 +1,4 @@
-package model;
+package se.ju14.scrumboard.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

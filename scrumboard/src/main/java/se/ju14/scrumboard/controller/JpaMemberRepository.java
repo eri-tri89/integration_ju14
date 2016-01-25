@@ -1,156 +1,173 @@
-package controller;
+package se.ju14.scrumboard.controller;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
-import model.Users;
-import model.UserStatus;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import se.ju14.scrumboard.model.Member;
+import se.ju14.scrumboard.model.MemberStatus;
 
 /**
  * 
- * @author Pierre Vanderpol
+ * @author Pierre Vanderpol, Jesper Wendler, Erik Perez
  *
  */
-public final class JpaUserRepository implements UserRepositoty {
+public final class JpaMemberRepository implements MemberRepository {
 
-	   // JUST FOR TEST REMOVE IT LATER
-		private final Map<String, Users> users = new HashMap<>();
-		//private static final AtomicLong userIds = new AtomicLong();
-		
-		/**
-		 * Creates a new User object in the database and gives it an ID
-		 * 
-		 * @parameter USer : a valid User parameter is needed
-		 * @return returns a newly created User object
-		 */
-		@Override
-		public Users create(Users entity) {
-			String id = UUID.randomUUID().toString(); 
-			entity = entity.setUserId(id);
+	private static final String PERSISTENCE_UNIT_NAME = "board";
+	private static EntityManagerFactory factory;
+
+	/**
+	 * Creates a new Member object in the database and gives it an ID
+	 * 
+	 * @parameter Entity : a valid Entity parameter is needed
+	 * @return returns a newly created Member object
+	 */
+	@Override
+	public Member create(Member entity) {
+
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+		//if (em.find(entity.getClass(), entity.getUserName()) == null) {
+			String id = UUID.randomUUID().toString();
+			em.getTransaction().begin();
+			entity.setMemberId(id);
+			em.persist(entity);
+			em.getTransaction().commit();
 			
-			// CHANGE THIS LATER TO GET RESULT FROM DATABASE
-			//users.put(id, entity);
-			//
-			return entity;
-		}
-
+			System.out.println("Entity created First name: "+ entity.getFirstName() 
+			+ "User name"+entity.getUserName());
+		//}
 		
-		/**
-		 * Updates an existing User object in the database
-		 * 
-		 * @parameter User : a valid User parameter is needed
-		 * @return returns the updated User object
-		 */
-		@Override
-		public Users update(Users entity) {
-			users.put(entity.getUserId(), entity);
-			return entity;
-		}
+		em.close();
 
-		/**
-		 * Deletes an existing User object in the database. Objects are never
-		 * deleted but their status is changed.
-		 * 
-		 * @parameter User : a valid User parameter is needed
-		 * @return returns the updated User object
-		 */
-		@Override
-		public Users delete(Users entity) {
+		return entity;
+	}
+
+	/**
+	 * Updates an existing User object in the database(?)
+	 * 
+	 * @parameter User : a valid User parameter is needed
+	 * @return returns the updated User object
+	 */
+	@Override
+	public Member update(Member entity) {
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+		
+		Member memberToChange = em.find(Member.class, entity.getId());
+		
+		if (memberToChange != null) {			
+			em.getTransaction().begin();
+				
+			memberToChange.setFirstName(entity.getFirstName());
+			memberToChange.setLastName(entity.getLastName());
+			memberToChange.setUserStatus(entity.getUserStatus());
+			// memberToChange.setWorkItems(entity.getWorkItems());
+		
 			
-			// CHANGE TO DATABASE
-			if (users.get(entity.getUserId()) != null) {
-				entity.setUserStatus(UserStatus.DELETED);
-				// users.put(entity.getUserId(),entity);
-				return entity;
-				}else{
-				return null;
-			}
-		}
-		
-		
-		/**
-		 * Get an existing User object in the database by ID
-		 * 
-		 * @parameter User : a valid String id parameter is needed
-		 * @return returns the corresponding User object
-		 */
-		@Override
-		public Users getUserById(String userId) {
+			em.merge(entity);
+			em.getTransaction().commit();
 			
-			if (users.get(userId) != null) {
-				return users.get(userId);
-				}else{
-				return null;
-			}
+			System.out.println("Entity updated First name: "+ entity.getFirstName() 
+			+ "User name"+entity.getUserName());
 		}
+		
+		em.close();
+
+		return entity;
+
+	}
+
+	/**
+	 * Deletes an existing User object in the database. Objects are never
+	 * deleted but their status is changed.
+	 * 
+	 * @parameter User : a valid User parameter is needed
+	 * @return returns the updated User object
+	 */
+	@Override
+	public Member delete(Member entity) {
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		EntityManager em = factory.createEntityManager();
+		Member memberToChange = em.find(entity.getClass(), entity.getUserName());
+		if (memberToChange != null) {			
+			em.getTransaction().begin();
+			
+			memberToChange.setUserStatus(MemberStatus.DELETED);
+			
+			em.persist(entity);
+			em.getTransaction().commit();
+		}
+		
+		em.close();
+
+		return entity;
 
 		
-		/**
-		 * Get all user object
-		 * 
-		 * @return returns Collection of User
-		 */
-		@Override
-		public Collection<Users> getAllUser() {
-			return users.values();
-		}
+	}
 
-		/**
-		 * Get an existing User object in the database by firstName
-		 * 
-		 * @parameter User : a valid String id parameter is needed
-		 * @return returns the corresponding User object
-		 */
-		@Override
-		public Users getUserByFirstName(String firstName) {
-			Collection<Users> usr = users.values();
-			for(Users u : usr){
-				if(u.getFirstName().equals(firstName)){
-					System.out.println("inside collection"+u.toString());
-					return u;
-				}
-			}
-			return null;
-		}
+	/**
+	 * Get an existing User object in the database by ID
+	 * 
+	 * @parameter User : a valid String id parameter is needed
+	 * @return returns the corresponding User object
+	 */
+	@Override
+	public Member getUserById(String userId) {
 
-		/**
-		 * Get an existing User object in the database by LastName
-		 * 
-		 * @parameter User : a valid String id parameter is needed
-		 * @return returns the corresponding User object
-		 */
-		
-		@Override
-		public Users getUserByLastName(String LastName) {
-			Collection<Users> usr = users.values();
-			for(Users u : usr){
-				if(u.getLastName().equals(LastName)){
-					return u;
-				}
-			}
-			return null;
-		}
-		
-		/**
-		 * Get an existing User object in the database by UserName
-		 * 
-		 * @parameter User : a valid String id parameter is needed
-		 * @return returns the corresponding User object
-		 */
-		
-		@Override
-		public Users getUserByUserName(String UserName) {
-			Collection<Users> usr = users.values();
-			for(Users u : usr){
-				if(u.getUserName().equals(UserName)){
-					return u;
-				}
-			}
-			return null;
-		}
+		return null;
+	}
+
+	/**
+	 * Get all user object
+	 * 
+	 * @return returns Collection of User
+	 */
+	@Override
+	public Collection<Member> getAllUser() {
+
+		return null;
+	}
+
+	/**
+	 * Get an existing User object in the database by firstName
+	 * 
+	 * @parameter User : a valid String id parameter is needed
+	 * @return returns the corresponding User object
+	 */
+	@Override
+	public Member getUserByFirstName(String firstName) {
+
+		return null;	}
+
+	/**
+	 * Get an existing User object in the database by LastName
+	 * 
+	 * @parameter User : a valid String id parameter is needed
+	 * @return returns the corresponding User object
+	 */
+
+	@Override
+	public Member getUserByLastName(String LastName) {
+
+		return null;
+	}
+
+	/**
+	 * Get an existing User object in the database by UserName
+	 * 
+	 * @parameter User : a valid String id parameter is needed
+	 * @return returns the corresponding User object
+	 */
+
+	@Override
+	public Member getUserByUserName(String UserName) {
+
+		return null;
+	}
 
 }
