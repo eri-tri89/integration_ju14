@@ -31,7 +31,7 @@ public class Member implements Serializable {
 	private String userName;
 	@Enumerated(EnumType.STRING)
 	private MemberStatus memberStatus;
-//	private Set<WorkItem> workItems;
+	//private Set<WorkItem> workItems;
 
 	public Member() {
 	}
@@ -46,6 +46,14 @@ public class Member implements Serializable {
 		this.lastName = lastName;
 		this.userName = userName;
 		this.memberStatus = MemberStatus.ACTIVE;
+	}
+
+	public Member(String memberId2, String firstName2, String lastName2, String userName2, MemberStatus memberStatus2) {
+		this.memberId = memberId2;
+		this.firstName = firstName2;
+		this.lastName = lastName2;
+		this.userName = userName2;
+		this.memberStatus = memberStatus2;
 	}
 
 	public Member setMemberId(String userId) {
@@ -81,7 +89,7 @@ public class Member implements Serializable {
 		return memberStatus;
 	}
 
-	public void setUserStatus(MemberStatus memberStatus) {
+	public void setMemberStatus(MemberStatus memberStatus) {
 		this.memberStatus = memberStatus;
 	}
 

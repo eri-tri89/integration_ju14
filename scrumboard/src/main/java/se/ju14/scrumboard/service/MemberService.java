@@ -18,7 +18,7 @@ import se.ju14.scrumboard.model.Member;
  * This class manages the user functions and service
  * @author Erik Pérez
  * */
-@Path("/user")
+@Path("/member")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class MemberService {

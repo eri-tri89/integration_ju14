@@ -19,8 +19,8 @@ public class Main {
 	    
 	    repo.create(member2);
 	    
-	    member2.setFirstName("bob");
-	    repo.update(member2);
+	   member2.setFirstName("bob");
+	   repo.update(member2);
 	  
 	    
 	  }

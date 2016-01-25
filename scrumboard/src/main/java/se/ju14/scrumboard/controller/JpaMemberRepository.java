@@ -62,13 +62,6 @@ public final class JpaMemberRepository implements MemberRepository {
 		
 		if (memberToChange != null) {			
 			em.getTransaction().begin();
-				
-			memberToChange.setFirstName(entity.getFirstName());
-			memberToChange.setLastName(entity.getLastName());
-			memberToChange.setUserStatus(entity.getUserStatus());
-			// memberToChange.setWorkItems(entity.getWorkItems());
-		
-			
 			em.merge(entity);
 			em.getTransaction().commit();
 			
@@ -97,7 +90,7 @@ public final class JpaMemberRepository implements MemberRepository {
 		if (memberToChange != null) {			
 			em.getTransaction().begin();
 			
-			memberToChange.setUserStatus(MemberStatus.DELETED);
+			memberToChange.setMemberStatus(MemberStatus.DELETED);
 			
 			em.persist(entity);
 			em.getTransaction().commit();
