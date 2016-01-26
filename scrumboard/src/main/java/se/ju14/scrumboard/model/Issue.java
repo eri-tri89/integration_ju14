@@ -23,9 +23,13 @@ public final class Issue {
 	private Long id;
 	private String title;
 	private String description;
-	
+
 	@Enumerated(EnumType.STRING)
-    private IssueStatus issueStatus;
+	private IssueStatus issueStatus;
+
+	public Issue() {
+		super();
+	}
 
 	public Issue(String title, String description) {
 		super();
@@ -61,7 +65,11 @@ public final class Issue {
 	public void setIssueStatus(IssueStatus issueStatus) {
 		this.issueStatus = issueStatus;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Issue [id=" + id + ", title=" + title + ", description=" + description + ", issueStatus=" + issueStatus
+				+ "]";
+	}
 	
 }

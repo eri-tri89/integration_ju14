@@ -1,9 +1,9 @@
 package se.ju14.scrumboard.repository.action;
 
-import java.util.Collection;
+import java.util.List;
 
-import se.ju14.scrumboard.model.Team;
 import se.ju14.scrumboard.model.Member;
+import se.ju14.scrumboard.model.Team;
 
 /**
  * Crud operations specific to Team.
@@ -14,10 +14,10 @@ import se.ju14.scrumboard.model.Member;
 public interface TeamRepository extends CrudRepository<Team> {
 	
 	// Get all teams  
-	Collection<Team> getAllTeams();
+	List<Team> getAllTeams();
 
 	// Lägg till en user till ett team
-	Collection<Member> getAllTeamMembers(Team team);
+	List<Member> getAllTeamMembers(Team team);
 	
 	
 	

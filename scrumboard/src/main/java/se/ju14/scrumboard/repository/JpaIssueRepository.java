@@ -1,13 +1,9 @@
 package se.ju14.scrumboard.repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 
 import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.WorkItem;
-import se.ju14.scrumboard.model.status.IssueStatus;
 import se.ju14.scrumboard.repository.action.IssueRepository;
 
 /**
@@ -18,9 +14,7 @@ import se.ju14.scrumboard.repository.action.IssueRepository;
  */
 public final class JpaIssueRepository implements IssueRepository {
 
-	// JUST FOR TEST REMOVE IT LATER
-	private final Map<String, Issue> issues = new HashMap<>();
-
+	
 	/**
 	 * Creates a new Issue object in the database and gives it an ID
 	 * 
@@ -55,16 +49,24 @@ public final class JpaIssueRepository implements IssueRepository {
 		return null;
 	}
 
-	// TO DO
 	@Override
-	public Collection<WorkItem> getAllaWorkItemWithIssue() {
+	public List<Issue> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<WorkItem> getAllaWorkItemWithIssue() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public WorkItem addIssueToWorkItem(WorkItem WorkItem, Issue IssueID) {
-
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

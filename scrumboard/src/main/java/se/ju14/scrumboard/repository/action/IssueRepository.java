@@ -1,6 +1,6 @@
 package se.ju14.scrumboard.repository.action;
 
-import java.util.Collection;
+import java.util.List;
 
 import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.WorkItem;
@@ -14,7 +14,7 @@ import se.ju14.scrumboard.model.WorkItem;
 public interface IssueRepository extends CrudRepository<Issue> {
 
 	// Get all Workitems with an issue 
-	Collection<WorkItem> getAllaWorkItemWithIssue();
+	List<WorkItem> getAllaWorkItemWithIssue();
 
 	// Adds a new Issue to a WorkItem and returns the updated WorkItem
 	WorkItem addIssueToWorkItem(WorkItem WorkItem, Issue IssueID);

@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,9 +43,13 @@ public class WorkItem {
 	private ItemStatus itemStatus;
 	
 	@Column(nullable=true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workItem")
-	private Set<Issue> issues;
+	@OneToMany
+	private Set<Issue> issues;	
 	
+	public WorkItem() {
+		super();
+	}
+
 	public WorkItem(String itemID, String subject, String description) {
 		this.itemID = itemID;
 		this.subject = subject;
@@ -99,6 +102,10 @@ public class WorkItem {
 		this.issues = issues;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "WorkItem [id=" + id + ", itemID=" + itemID + ", subject=" + subject + ", description=" + description
+				+ ", itemStatus=" + itemStatus + ", issues=" + issues + "]";
+	}
 
 }

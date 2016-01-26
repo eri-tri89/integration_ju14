@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,9 +48,13 @@ public class Member implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private MemberStatus memberStatus;
 
-	@Column(nullable = true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+	@OneToMany
+	@Column(nullable = true)	
 	private Set<WorkItem> workItems;
+
+	public Member() {
+		super();
+	}
 
 	public Member(String firstName, String lastName, String userName) {
 		this.firstName = firstName;
@@ -107,6 +110,12 @@ public class Member implements Serializable {
 
 	public void setWorkItems(Set<WorkItem> workItems) {
 		this.workItems = workItems;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", memberId=" + memberId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", memberStatus=" + memberStatus + ", workItems=" + workItems + "]";
 	}
 
 }

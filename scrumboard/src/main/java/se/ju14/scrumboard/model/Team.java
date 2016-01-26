@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,11 +36,15 @@ public final class Team {
 	private String name;
 	
 	@Column(nullable = true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workItem")
+	@OneToMany
 	private Set<Member> members;
 	
 	@Enumerated(EnumType.STRING)
 	private TeamStatus teamStatus;	
+	
+	public Team() {
+		super();
+	}
 
 	public Team(String name, TeamStatus teamStatus) {		
 		this.name = name;
@@ -71,6 +74,11 @@ public final class Team {
 
 	public void setTeamStatus(TeamStatus teamStatus) {
 		this.teamStatus = teamStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Team [id=" + id + ", name=" + name + ", members=" + members + ", teamStatus=" + teamStatus + "]";
 	}
 	
 	
