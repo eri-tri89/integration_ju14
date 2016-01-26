@@ -31,7 +31,6 @@ public final class JpaIssueRepository implements IssueRepository {
 	public Issue create(Issue entity) {
 			String id = UUID.randomUUID().toString();
 			entity = entity.setWorkItemId(id);
-			// CHANGE THIS LATER TO GET RESULT FROM DATABASE
 			issues.put(id, entity);
 			//
 			return entity;

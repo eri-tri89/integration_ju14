@@ -16,7 +16,7 @@ import se.ju14.scrumboard.repository.action.MemberRepository;
  * @author Pierre Vanderpol, Jesper Wendler, Erik Perez
  *
  */
-public final class JpaMemberRepository implements MemberRepository {
+public final class JpaMemberRepository extends InMemoryRepository implements MemberRepository {
 
 	private static final String PERSISTENCE_UNIT_NAME = "board";
 	private static EntityManagerFactory factory;
@@ -30,9 +30,8 @@ public final class JpaMemberRepository implements MemberRepository {
 	@Override
 	public Member create(Member entity) {
 
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
-		//if (em.find(entity.getClass(), entity.getUserName()) == null) {
+//		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+//		EntityManager em = factory.createEntityManager();
 			String id = UUID.randomUUID().toString();
 			em.getTransaction().begin();
 			entity.setMemberId(id);

@@ -21,35 +21,29 @@ public final class Issue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String workItemId;
+	private String title;
 	private String description;
 	
 	@Enumerated(EnumType.STRING)
     private IssueStatus issueStatus;
 
-	
-	/*
-	private enum issueStatus {
-		ACTIVE, ONHOLD, WAITING, DONE, DELETED
-	};
-	*/
-	
-	public Issue() {
-	}
-	
-	public Issue(String workItemId, String description,IssueStatus issueStatus) {
+	public Issue(String title, String description) {
 		super();
-		this.workItemId = workItemId;
+		this.title = title;
 		this.description = description;
-		this.issueStatus = issueStatus;
+		this.issueStatus = IssueStatus.ACTIVE;
 	}
 
-	public String getWorkItemId() {
-		return workItemId;
+	public Long getId() {
+		return id;
 	}
 
-	public Issue setWorkItemId(String workItemId) {
-		return new Issue(workItemId,description,issueStatus);
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -67,14 +61,7 @@ public final class Issue {
 	public void setIssueStatus(IssueStatus issueStatus) {
 		this.issueStatus = issueStatus;
 	}
-
-	@Override
-	public String toString() {
-		return "Issue [id=" + id + ", workItemId=" + workItemId + ", description=" + description + ", issueStatus="
-				+ issueStatus + "]";
-	}
-
 	
 	
-
+	
 }

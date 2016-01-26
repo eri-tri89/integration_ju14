@@ -14,7 +14,7 @@ import se.ju14.scrumboard.repository.action.WorkItemRepository;
  * @author Pierre Vanderpol
  *
  */
-public final class JpaWorkItemRepository implements WorkItemRepository {
+public final class JpaWorkItemRepository  extends InMemoryRepository implements WorkItemRepository {
 
 	@Override
 	public WorkItem create(WorkItem entity) {
@@ -74,13 +74,6 @@ public final class JpaWorkItemRepository implements WorkItemRepository {
 	public WorkItem addIssueToWorkItem(WorkItem workItem, Issue issue) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	
-	/**
-	 * TO DO
-	 * 
-	 * */
-	
+	}	
 
 }
