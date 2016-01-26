@@ -18,8 +18,7 @@ import se.ju14.scrumboard.repository.action.MemberRepository;
  */
 public final class JpaMemberRepository extends InMemoryRepository implements MemberRepository {
 
-	private static final String PERSISTENCE_UNIT_NAME = "board";
-	private static EntityManagerFactory factory;
+	
 
 	/**
 	 * Creates a new Member object in the database and gives it an ID
@@ -29,20 +28,6 @@ public final class JpaMemberRepository extends InMemoryRepository implements Mem
 	 */
 	@Override
 	public Member create(Member entity) {
-
-//		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-//		EntityManager em = factory.createEntityManager();
-			String id = UUID.randomUUID().toString();
-			em.getTransaction().begin();
-			entity.setMemberId(id);
-			em.persist(entity);
-			em.getTransaction().commit();
-			
-			System.out.println("Entity created First name: "+ entity.getFirstName() 
-			+ "User name"+entity.getUserName());
-		//}
-		
-		em.close();
 
 		return entity;
 	}
@@ -55,22 +40,7 @@ public final class JpaMemberRepository extends InMemoryRepository implements Mem
 	 */
 	@Override
 	public Member update(Member entity) {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
 		
-		Member memberToChange = em.find(Member.class, entity.getId());
-		
-		if (memberToChange != null) {			
-			em.getTransaction().begin();
-			em.merge(entity);
-			em.getTransaction().commit();
-			
-			System.out.println("Entity updated First name: "+ entity.getFirstName() 
-			+ "User name"+entity.getUserName());
-		}
-		
-		em.close();
-
 		return entity;
 
 	}
@@ -84,20 +54,7 @@ public final class JpaMemberRepository extends InMemoryRepository implements Mem
 	 */
 	@Override
 	public Member delete(Member entity) {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		EntityManager em = factory.createEntityManager();
-		Member memberToChange = em.find(entity.getClass(), entity.getUserName());
-		if (memberToChange != null) {			
-			em.getTransaction().begin();
-			
-			memberToChange.setMemberStatus(MemberStatus.DELETED);
-			
-			em.persist(entity);
-			em.getTransaction().commit();
-		}
-		
-		em.close();
-
+	
 		return entity;
 
 		
