@@ -44,7 +44,7 @@ public class RepositoryTest {
 			
 			// UPDATE & DELETE
 			System.out.println("Update User 2");
-			usr2.setUserStatus(MemberStatus.DELETED);
+			usr2.setMemberStatus(MemberStatus.DELETED);
 			testUser.update(usr2);
 			System.out.println(usr2.toString());
 			System.out.println("");
