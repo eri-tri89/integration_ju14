@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import se.ju14.scrumboard.model.status.TeamStatus;
+
 /**
  * 
  * @author Jesper Wendler, Pierre Vanderpol

@@ -1,13 +1,14 @@
-package se.ju14.scrumboard.controller;
+package se.ju14.scrumboard.repository;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import se.ju14.scrumboard.model.Team;
-import se.ju14.scrumboard.model.TeamStatus;
 import se.ju14.scrumboard.model.Member;
+import se.ju14.scrumboard.model.Team;
+import se.ju14.scrumboard.model.status.TeamStatus;
+import se.ju14.scrumboard.repository.action.TeamRepository;
 
 /**
  * 

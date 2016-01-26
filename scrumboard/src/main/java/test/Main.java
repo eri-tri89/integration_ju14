@@ -4,8 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import se.ju14.scrumboard.controller.JpaMemberRepository;
 import se.ju14.scrumboard.model.Member;
+import se.ju14.scrumboard.repository.JpaMemberRepository;
 
 public class Main {
 

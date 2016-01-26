@@ -1,4 +1,4 @@
-package se.ju14.scrumboard.mapper;
+package se.ju14.scrumboard.jsonadapter;
 
 import java.lang.reflect.Type;
 

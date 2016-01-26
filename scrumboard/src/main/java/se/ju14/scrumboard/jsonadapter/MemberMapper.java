@@ -1,4 +1,4 @@
-package se.ju14.scrumboard.mapper;
+package se.ju14.scrumboard.jsonadapter;
 
 import java.io.IOException;
 import java.io.InputStream;

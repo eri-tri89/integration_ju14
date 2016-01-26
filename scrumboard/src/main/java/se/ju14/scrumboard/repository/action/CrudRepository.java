@@ -1,8 +1,6 @@
-package se.ju14.scrumboard.controller;
+package se.ju14.scrumboard.repository.action;
 
-import javax.ws.rs.core.Response;
 
-import se.ju14.scrumboard.model.Issue;
 
 /**
  * Common Crud operations shared by all repositories. 
@@ -11,7 +9,7 @@ import se.ju14.scrumboard.model.Issue;
  */
 public interface CrudRepository<E> {
 
-	E create(E entity);
+	E create(E entity);	
 	
 	E update(E entity);
 	

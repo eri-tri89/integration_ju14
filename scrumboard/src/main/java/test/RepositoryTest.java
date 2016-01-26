@@ -2,13 +2,13 @@ package test;
 
 import java.util.Collection;
 
-import se.ju14.scrumboard.controller.JpaIssueRepository;
-import se.ju14.scrumboard.controller.JpaTeamRepository;
-import se.ju14.scrumboard.controller.JpaMemberRepository;
 import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.IssueStatus;
 import se.ju14.scrumboard.model.Team;
 import se.ju14.scrumboard.model.TeamStatus;
+import se.ju14.scrumboard.repository.JpaIssueRepository;
+import se.ju14.scrumboard.repository.JpaMemberRepository;
+import se.ju14.scrumboard.repository.JpaTeamRepository;
 import se.ju14.scrumboard.model.MemberStatus;
 import se.ju14.scrumboard.model.Member;
 

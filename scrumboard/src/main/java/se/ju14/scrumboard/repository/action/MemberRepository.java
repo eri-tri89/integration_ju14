@@ -1,4 +1,4 @@
-package se.ju14.scrumboard.controller;
+package se.ju14.scrumboard.repository.action;
 
 import java.util.Collection;
 

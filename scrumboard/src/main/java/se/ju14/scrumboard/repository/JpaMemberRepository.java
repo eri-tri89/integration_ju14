@@ -1,4 +1,4 @@
-package se.ju14.scrumboard.controller;
+package se.ju14.scrumboard.repository;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -8,7 +8,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import se.ju14.scrumboard.model.Member;
-import se.ju14.scrumboard.model.MemberStatus;
+import se.ju14.scrumboard.model.status.MemberStatus;
+import se.ju14.scrumboard.repository.action.MemberRepository;
 
 /**
  * 

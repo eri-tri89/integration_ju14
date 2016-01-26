@@ -1,4 +1,4 @@
-package se.ju14.scrumboard.model;
+package se.ju14.scrumboard.model.status;
 
 /**
  * @author Jesper Wendler

@@ -1,6 +1,13 @@
-package se.ju14.scrumboard.model;
+package se.ju14.scrumboard.repository;
 
 import java.util.Collection;
+
+import se.ju14.scrumboard.model.Issue;
+import se.ju14.scrumboard.model.Member;
+import se.ju14.scrumboard.model.Team;
+import se.ju14.scrumboard.model.WorkItem;
+import se.ju14.scrumboard.model.status.IssueStatus;
+import se.ju14.scrumboard.repository.action.WorkItemRepository;
 
 /**
  * 
@@ -9,12 +16,6 @@ import java.util.Collection;
  */
 public final class JpaWorkItemRepository implements WorkItemRepository {
 
-	
-	/**
-	 * TO DO
-	 * 
-	 * */
-	
 	@Override
 	public WorkItem create(WorkItem entity) {
 		// TODO Auto-generated method stub
@@ -74,5 +75,12 @@ public final class JpaWorkItemRepository implements WorkItemRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+	/**
+	 * TO DO
+	 * 
+	 * */
+	
 
 }

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import se.ju14.scrumboard.model.status.MemberStatus;
+
 /**
  * 
  * @author Jesper Wendler, Pierre Vanderpol, Erik Perez
