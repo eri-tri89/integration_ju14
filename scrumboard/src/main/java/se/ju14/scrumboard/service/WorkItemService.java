@@ -102,6 +102,7 @@ public class WorkItemService {
 	 * get items that has a common word in it
 	 * */
 	@GET
+	@Path("/byword")
 	public Response getWorkItemsByWord(@QueryParam("filter")String word) {
 		return null;
 	}
@@ -110,6 +111,7 @@ public class WorkItemService {
 	 * get items that has issues
 	 * */
 	@GET
+	@Path("/withissues")
 	public Response getWorkItemsWithIssues(@QueryParam("issues")boolean hasIssues) {
 		return null;
 	}
