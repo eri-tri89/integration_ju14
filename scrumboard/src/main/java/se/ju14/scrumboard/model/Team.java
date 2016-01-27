@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,6 +25,7 @@ import se.ju14.scrumboard.model.status.TeamStatus;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name = "Team.findAll", query = "Select t from Team t"),
 	@NamedQuery(name = "Team.findById", query = "Select t from Team t where t.name = :name")
 })
 public final class Team {
@@ -35,10 +37,11 @@ public final class Team {
 	@Column(unique=true)
 	private String name;
 	
-	@Column(nullable = true)
+	@JoinColumn(nullable = true)
 	@OneToMany
 	private Set<Member> members;
 	
+	@Column
 	@Enumerated(EnumType.STRING)
 	private TeamStatus teamStatus;	
 	
@@ -46,9 +49,9 @@ public final class Team {
 		super();
 	}
 
-	public Team(String name, TeamStatus teamStatus) {		
+	public Team(String name) {		
 		this.name = name;
-		this.teamStatus = teamStatus;
+		this.teamStatus = TeamStatus.ACTIVE;
 		this.members = new HashSet<Member>(0);
 	}
 
@@ -58,6 +61,10 @@ public final class Team {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Set<Member> getMembers() {

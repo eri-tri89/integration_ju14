@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -26,7 +27,8 @@ import se.ju14.scrumboard.model.status.ItemStatus;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="WorkItem.findAll",query="Select w from WorkItem w"),
-	@NamedQuery(name="WorkItem.findByStatus",query="Select w from WorkItem w where w.itemStatus = :itemStatus")
+	@NamedQuery(name="WorkItem.findByStatus",query="Select w from WorkItem w where w.itemStatus = :itemStatus"),
+	@NamedQuery(name="WorkItem.findById",query="Select w from WorkItem w where w.itemID = :itemID")
 })
 public class WorkItem {
 
@@ -39,10 +41,11 @@ public class WorkItem {
 	private String subject;
 	private String description;
 	
+	@Column
 	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
 	
-	@Column(nullable=true)
+	@JoinColumn(nullable=true)
 	@OneToMany
 	private Set<Issue> issues;	
 	
@@ -50,8 +53,7 @@ public class WorkItem {
 		super();
 	}
 
-	public WorkItem(String itemID, String subject, String description) {
-		this.itemID = itemID;
+	public WorkItem(String subject, String description) {
 		this.subject = subject;
 		this.description = description;
 		this.itemStatus = ItemStatus.ACTIVE;

@@ -12,7 +12,7 @@ import se.ju14.scrumboard.repository.action.IssueRepository;
  * @author Pierre Vanderpol
  *
  */
-public final class JpaIssueRepository implements IssueRepository {
+public final class JpaIssueRepository extends InMemoryRepository<Issue> implements IssueRepository {
 
 	
 	/**
