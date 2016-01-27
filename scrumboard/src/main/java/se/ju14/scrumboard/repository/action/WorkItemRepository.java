@@ -14,13 +14,13 @@ import se.ju14.scrumboard.model.status.IssueStatus;
  */
 public interface WorkItemRepository extends CrudRepository<WorkItem> {
 
-	WorkItem asignWorkItemToUser(Member user, String WorkItemId);
+	WorkItem asignWorkItemToMember(Member member, String workItemId);
 	
 	List<WorkItem> getWorkItemsByStatus(IssueStatus issueStatus);
 
 	List<WorkItem> getWorkItemsByTeam(Team team);
 	
-	List<WorkItem> getWorkItemsByUser(Member user);
+	List<WorkItem> getWorkItemsByMember(Member member);
 	
 	List<WorkItem> getWorkItemsByWord(String word);
 	

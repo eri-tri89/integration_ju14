@@ -24,7 +24,7 @@ public class InMemoryRepository<T> {
 	}
 
 	protected void saveOrUpdateEntity(Consumer<EntityManager> operation) {
-		entityManager = factory.createEntityManager();
+		entityManager = createEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			operation.accept(entityManager);
@@ -35,7 +35,7 @@ public class InMemoryRepository<T> {
 	}
 
 	protected List<T> executeQuery(String query, Class<T> t) {
-		entityManager = factory.createEntityManager();
+		entityManager = createEntityManager();
 		try {
 			return entityManager.createNamedQuery(query, t).getResultList();
 		} finally {
@@ -44,7 +44,7 @@ public class InMemoryRepository<T> {
 	}
 	
 	protected List<T> executeQuery(String query, Class<T> t,String param,Object toFind) {
-		entityManager = factory.createEntityManager();
+		entityManager = createEntityManager();
 		try {
 			return entityManager.createNamedQuery(query,t).setParameter(param, toFind).getResultList();
 		} finally {

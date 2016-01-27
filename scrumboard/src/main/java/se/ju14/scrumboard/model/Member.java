@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,11 +46,12 @@ public class Member implements Serializable {
 	@Column(unique = true)
 	private String userName;
 
+	@Column
 	@Enumerated(EnumType.STRING)
 	private MemberStatus memberStatus;
 
 	@OneToMany
-	@Column(nullable = true)	
+	@JoinColumn(nullable = true)	
 	private Set<WorkItem> workItems;
 
 	public Member() {

@@ -1,5 +1,6 @@
 package se.ju14.scrumboard.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,6 +25,7 @@ public final class Issue {
 	private String title;
 	private String description;
 
+	@Column
 	@Enumerated(EnumType.STRING)
 	private IssueStatus issueStatus;
 

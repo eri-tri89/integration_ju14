@@ -10,7 +10,7 @@ import se.ju14.scrumboard.model.WorkItem;
  * @author Pierre Vanderpol
  *
  */
-
+/* behövs inte så länge */
 public interface IssueRepository extends CrudRepository<Issue> {
 
 	// Get all Workitems with an issue 

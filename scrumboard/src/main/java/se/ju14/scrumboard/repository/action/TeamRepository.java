@@ -13,11 +13,11 @@ import se.ju14.scrumboard.model.Team;
 
 public interface TeamRepository extends CrudRepository<Team> {
 	
-	// Get all teams  
-	List<Team> getAllTeams();
-
+	// Get all teams
+	List<Team> getTeamByName(String name);
+	
 	// Lägg till en user till ett team
-	List<Member> getAllTeamMembers(Team team);
+	List<Member> getAllTeamMembers(String name);
 	
 	
 	
