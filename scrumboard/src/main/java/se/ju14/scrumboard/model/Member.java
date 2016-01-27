@@ -1,6 +1,7 @@
 package se.ju14.scrumboard.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,10 +53,26 @@ public class Member implements Serializable {
 	private MemberStatus memberStatus;
 
 	@Column(nullable = true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-	private Set<WorkItem> workItems;
+	@ManyToOne(optional = "members")
+	private Collection<WorkItem> workItems;
+
+	
+	// Must have an empty public constructor
+	public Member() {
+	}
 
 	public Member(String firstName, String lastName, String userName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.memberStatus = MemberStatus.ACTIVE;
+		this.workItems = new HashSet<WorkItem>();
+	}
+	
+	
+	// Constructor that works with the JSON deserializer 
+	public Member(String memberId, String firstName, String lastName, String userName, MemberStatus memberStatus) {
+		this.memberId = memberId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;

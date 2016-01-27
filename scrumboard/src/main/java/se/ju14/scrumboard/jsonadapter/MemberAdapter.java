@@ -11,7 +11,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import se.ju14.scrumboard.model.Member;
-import se.ju14.scrumboard.model.MemberStatus;
+import se.ju14.scrumboard.model.status.MemberStatus;
 
 public final class MemberAdapter implements JsonSerializer<Member>, JsonDeserializer<Member> {
 
@@ -25,7 +25,7 @@ public final class MemberAdapter implements JsonSerializer<Member>, JsonDeserial
 		json.addProperty("firstName", member.getFirstName());
 		json.addProperty("lastName", member.getLastName());
 		json.addProperty("userName", member.getUserName());
-		json.addProperty("memberStatus", member.getUserStatus().toString());
+		json.addProperty("memberStatus", member.getMemberStatus().toString());
 		
 		
 		/*

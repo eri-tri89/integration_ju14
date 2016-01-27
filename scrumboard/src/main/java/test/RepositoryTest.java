@@ -2,15 +2,9 @@ package test;
 
 import java.util.Collection;
 
-import se.ju14.scrumboard.model.Issue;
-import se.ju14.scrumboard.model.IssueStatus;
-import se.ju14.scrumboard.model.Team;
-import se.ju14.scrumboard.model.TeamStatus;
-import se.ju14.scrumboard.repository.JpaIssueRepository;
-import se.ju14.scrumboard.repository.JpaMemberRepository;
-import se.ju14.scrumboard.repository.JpaTeamRepository;
-import se.ju14.scrumboard.model.MemberStatus;
 import se.ju14.scrumboard.model.Member;
+import se.ju14.scrumboard.model.status.MemberStatus;
+import se.ju14.scrumboard.repository.JpaMemberRepository;
 
 
 /**
@@ -77,7 +71,7 @@ public class RepositoryTest {
 			// DELETE
 			System.out.println("Delete User 2");
 			testUser.delete(usr2);
-			System.out.println("null is user deleted : " + usr2.getFirstName() +" " + usr2.getUserStatus());
+			System.out.println("null is user deleted : " + usr2.getFirstName() +" " + usr2.getMemberStatus());
 			
 			// GET ALL USERS
 			System.out.println("Get all users");

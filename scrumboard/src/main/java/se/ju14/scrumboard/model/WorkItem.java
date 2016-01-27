@@ -1,17 +1,15 @@
 package se.ju14.scrumboard.model;
 
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -43,16 +41,29 @@ public class WorkItem {
 	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
 	
+	/////
+	@OneToMany
+	private Collection<Member> members;
+	
+	/*
 	@Column(nullable=true)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workItem")
 	private Set<Issue> issues;
+	*/
+	
+	
+	// Must have an empty public constructor
+	public WorkItem(){
+		
+	}
+	
 	
 	public WorkItem(String itemID, String subject, String description) {
 		this.itemID = itemID;
 		this.subject = subject;
 		this.description = description;
 		this.itemStatus = ItemStatus.ACTIVE;
-		this.issues = new HashSet<Issue>(0);
+		// this.issues = new HashSet<Issue>(0);
 	}
 
 	public Long getId() {
@@ -91,6 +102,7 @@ public class WorkItem {
 		this.itemStatus = itemStatus;
 	}
 
+	/*
 	public Set<Issue> getIssues() {
 		return issues;
 	}
@@ -98,7 +110,7 @@ public class WorkItem {
 	public void setIssues(Set<Issue> issues) {
 		this.issues = issues;
 	}
-
+*/
 	
 
 }

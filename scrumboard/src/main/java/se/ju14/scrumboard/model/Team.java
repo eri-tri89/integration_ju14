@@ -36,9 +36,11 @@ public final class Team {
 	@Column(unique=true)
 	private String name;
 	
+	/*
 	@Column(nullable = true)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workItem")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "members")  /// WHAT IS THAT ?
 	private Set<Member> members;
+	*/
 	
 	@Enumerated(EnumType.STRING)
 	private TeamStatus teamStatus;	
@@ -48,10 +50,17 @@ public final class Team {
 		this.teamStatus = teamStatus;
 		this.members = new HashSet<Member>(0);
 	}
+	
+	// Must have an empty public constructor
+	public Team() {
+	}
+	
+	
 
 	public Long getId() {
 		return id;
 	}
+
 
 	public String getName() {
 		return name;

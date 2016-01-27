@@ -34,6 +34,10 @@ public final class Issue {
 		this.issueStatus = IssueStatus.ACTIVE;
 	}
 
+	// Must have an empty public constructor
+	public Issue() {
+	}
+
 	public Long getId() {
 		return id;
 	}
