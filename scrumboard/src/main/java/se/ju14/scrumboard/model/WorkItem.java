@@ -17,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import se.ju14.scrumboard.model.status.ItemStatus;
+import se.ju14.scrumboard.model.status.PriorityStatus;
 
 /**
  * The entity class to WorkItem
@@ -45,6 +46,10 @@ public class WorkItem {
 	@Enumerated(EnumType.STRING)
 	private ItemStatus itemStatus;
 	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private PriorityStatus priorityStatus;
+	
 	@JoinColumn(nullable=true)
 	@OneToMany
 	private Set<Issue> issues;	
@@ -57,6 +62,7 @@ public class WorkItem {
 		this.subject = subject;
 		this.description = description;
 		this.itemStatus = ItemStatus.ACTIVE;
+		this.priorityStatus = PriorityStatus.NORMAL;
 		this.issues = new HashSet<Issue>(0);
 	}
 
@@ -107,7 +113,9 @@ public class WorkItem {
 	@Override
 	public String toString() {
 		return "WorkItem [id=" + id + ", itemID=" + itemID + ", subject=" + subject + ", description=" + description
-				+ ", itemStatus=" + itemStatus + ", issues=" + issues + "]";
+				+ ", itemStatus=" + itemStatus + ", priorityStatus=" + priorityStatus + ", issues=" + issues + "]";
 	}
+
+	
 
 }
