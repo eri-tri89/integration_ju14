@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 import se.ju14.scrumboard.model.status.ItemStatus;
 
 /**
- * 
+ * The entity class to WorkItem
  * @author Jesper Wendler
  * @author Pierre Vanderpol
  */
@@ -28,7 +28,7 @@ import se.ju14.scrumboard.model.status.ItemStatus;
 @NamedQueries({
 	@NamedQuery(name="WorkItem.findAll",query="Select w from WorkItem w"),
 	@NamedQuery(name="WorkItem.findByStatus",query="Select w from WorkItem w where w.itemStatus = :itemStatus"),
-	@NamedQuery(name="WorkItem.findById",query="Select w from WorkItem w where w.itemID = :itemID")
+	//@NamedQuery(name="WorkItem.findById",query="Select w from WorkItem w where w.itemID = :itemID")
 })
 public class WorkItem {
 

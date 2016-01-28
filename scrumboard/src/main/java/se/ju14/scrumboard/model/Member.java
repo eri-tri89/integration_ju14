@@ -1,6 +1,5 @@
 package se.ju14.scrumboard.model;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ import javax.persistence.OneToMany;
 import se.ju14.scrumboard.model.status.MemberStatus;
 
 /**
- * 
+ * The entity class to Member
  * @author Jesper Wendler, Pierre Vanderpol, Erik Perez
  *
  */
@@ -32,9 +31,8 @@ import se.ju14.scrumboard.model.status.MemberStatus;
 	@NamedQuery(name = "Member.findByLastName", query = "Select m from Member m where m.lastName = :lastName"),
 	@NamedQuery(name = "Member.findByUserName", query = "Select m from Member m where m.userName = :userName")
 	})
-public class Member implements Serializable {
+public class Member{
 
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

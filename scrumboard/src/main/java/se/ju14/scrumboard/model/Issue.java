@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import se.ju14.scrumboard.model.status.IssueStatus;
 
 /**
- * 
+ * The entity class to Issue
  * @author Jesper Wendler
  * @author Pierre Vanderpol
  */
@@ -22,6 +22,7 @@ public final class Issue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private String issueID;
 	private String title;
 	private String description;
 
@@ -42,6 +43,14 @@ public final class Issue {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public String getIssueID() {
+		return issueID;
+	}
+
+	public void setIssueID(String issueID) {
+		this.issueID = issueID;
 	}
 
 	public String getTitle() {

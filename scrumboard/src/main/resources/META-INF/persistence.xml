@@ -7,7 +7,7 @@
 <properties>
 <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
 <property name="javax.persistence.jdbc.url"
-				value="jdbc:derby:/Users/pierrethereaper/scrumboardDB;create=true" />
+				value="jdbc:derby:/scrumboardDB;create=true" /><!-- bara url ändrad "/scrumboardDB" om det inte funkar då gäller det att ändra det tillbaks -->
 <property name="javax.persistence.jdbc.user" value="test"/>
 <property name="javax.persistence.jdbc.password" value="test"/>
 <!--

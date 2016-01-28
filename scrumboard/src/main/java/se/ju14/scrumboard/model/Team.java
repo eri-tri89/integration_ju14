@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 import se.ju14.scrumboard.model.status.TeamStatus;
 
 /**
- * 
+ * The entity class to Team
  * @author Jesper Wendler, Pierre Vanderpol
  *
  */
@@ -26,7 +26,7 @@ import se.ju14.scrumboard.model.status.TeamStatus;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "Team.findAll", query = "Select t from Team t"),
-	@NamedQuery(name = "Team.findById", query = "Select t from Team t where t.name = :name")
+	@NamedQuery(name = "Team.findByName", query = "Select t from Team t where t.name = :name")
 })
 public final class Team {
 

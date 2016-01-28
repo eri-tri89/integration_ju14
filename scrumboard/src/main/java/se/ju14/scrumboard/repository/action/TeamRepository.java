@@ -1,6 +1,5 @@
 package se.ju14.scrumboard.repository.action;
 
-import java.util.List;
 
 import se.ju14.scrumboard.model.Member;
 import se.ju14.scrumboard.model.Team;
@@ -13,11 +12,20 @@ import se.ju14.scrumboard.model.Team;
 
 public interface TeamRepository extends CrudRepository<Team> {
 	
-	// Get all teams
-	List<Team> getTeamByName(String name);
+	/**
+	 * Gets a team by its name
+	 * @param name the name of the team to be brought
+	 * @return the team with the parameter's name
+	 * */
+	Team getTeamByName(String name);
 	
-	// Lägg till en user till ett team
-	List<Member> getAllTeamMembers(String name);
+	/**
+	 * Adds a member to a certain team
+	 * @param member the member to be added to the team
+	 * @param team the team that the member will be part of
+	 * @return the updated team
+	 * */
+	Team addMemberToTeam(Member member,Team team);
 	
 	
 	

@@ -1,6 +1,5 @@
 package se.ju14.scrumboard.repository.action;
 
-import java.util.List;
 
 import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.WorkItem;
@@ -10,15 +9,28 @@ import se.ju14.scrumboard.model.WorkItem;
  * @author Pierre Vanderpol
  *
  */
-/* behövs inte så länge */
-public interface IssueRepository extends CrudRepository<Issue> {
+public interface IssueRepository{
 
-	// Get all Workitems with an issue 
-	List<WorkItem> getAllaWorkItemWithIssue();
-
-	// Adds a new Issue to a WorkItem and returns the updated WorkItem
-	WorkItem addIssueToWorkItem(WorkItem WorkItem, Issue IssueID);
+	/**
+	 * Adds an issue to a workItem
+	 * @param workItem the workItem that will add the issue
+	 * @param issue the issue to be added
+	 * @return the workItem with the issue list filled with the issue in the param
+	 * */
+	WorkItem addIssueToWorkItem(WorkItem workItem,Issue issue);
 	
+	/**
+	 * Updates an issue
+	 * @param issue the issue to be added
+	 * @return the issue updated
+	 * */
+	Issue update(Issue issue);
 	
+	/**
+	 * Updates the Issue object to DELETED
+	 * @param issue the issue to be DELETED
+	 * @return the issue DELETED
+	 * */
+	Issue delete(Issue issue);
 	
 }
