@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import se.ju14.scrumboard.model.status.IssueStatus;
 
@@ -17,6 +19,9 @@ import se.ju14.scrumboard.model.status.IssueStatus;
  */
 
 @Entity
+@NamedQueries(
+		@NamedQuery(name="Issue.findById",query="Select i from Issue i where i.issueID = :issueID")
+		)
 public final class Issue {
 
 	@Id

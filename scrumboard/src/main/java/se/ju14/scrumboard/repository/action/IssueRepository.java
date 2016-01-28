@@ -33,4 +33,11 @@ public interface IssueRepository{
 	 * */
 	Issue delete(Issue issue);
 	
+	/**
+	 * Gets an Issue by Id
+	 * @param issueID the id of the issue to be brought
+	 * @return the issue with the id
+	 * */
+	Issue getByID(String issueID);
+	
 }

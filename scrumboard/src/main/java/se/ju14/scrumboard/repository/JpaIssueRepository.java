@@ -52,4 +52,9 @@ public final class JpaIssueRepository extends InMemoryRepository<Issue> implemen
 		return issue;
 	}
 
+	@Override
+	public Issue getByID(String issueID) {
+		return super.executeQuery("Issue.findById", Issue.class, "issueID", issueID).get(0);
+	}
+
 }

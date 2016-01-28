@@ -45,6 +45,13 @@ public interface WorkItemRepository{
 	List<WorkItem> getByTeam(Team team);
 	
 	/**
+	 * Gets a work item object by id
+	 * @param itemId the id that belongs to the workItem
+	 * @return a work Item object
+	 * */
+	WorkItem getById(String itemId);
+	
+	/**
 	 * Gets a list of workItems by its status
 	 * @param itemStatus the status in common within the workItem List
 	 * @return a list of workItems with the same status

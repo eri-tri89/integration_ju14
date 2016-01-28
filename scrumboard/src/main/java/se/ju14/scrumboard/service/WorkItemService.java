@@ -1,5 +1,9 @@
 package se.ju14.scrumboard.service;
 
+import java.net.URI;
+import java.util.Collection;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -9,10 +13,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.WorkItem;
+import se.ju14.scrumboard.model.status.ItemStatus;
 
 /**
  * This class manages the workitem functions and service
@@ -20,9 +27,9 @@ import se.ju14.scrumboard.model.WorkItem;
  * @author Erik Pérez
  **/
 @Path("/workitem")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class WorkItemService {
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
+public class WorkItemService extends ScrumService {
 
 	/**
 	 * Creates a workItem adds it to an user
@@ -35,9 +42,11 @@ public class WorkItemService {
 	 * @return a 200 response it creates and assigns properly, 404 otherwise
 	 **/
 	@POST
-	@Path("/assigntouser/{userID}")
-	public Response createWorkItem(@PathParam("userID") String userID, WorkItem workItem) {
-		return null;
+	@Path("/assigntouser/{memberId}")
+	public Response createWorkItem(@PathParam("memberId") String memberId, WorkItem workItem) {		
+		WorkItem workItemToUpdate = itemRepository.saveAndAssignToMember(memberRepository.getById(memberId), workItem);
+		URI location = uriInfo.getAbsolutePathBuilder().path(workItemToUpdate.getItemID().toString()).build();
+		return Response.created(location).entity(workItemToUpdate).build();
 	}
 
 	/**
@@ -47,9 +56,10 @@ public class WorkItemService {
 	 *            the id of the item to be modified
 	 */
 	@PUT
-	@Path("{itemID}")
-	public Response updateWorkItem(@PathParam("itemID") String itemID) {
-		return null;
+	public Response updateWorkItem(WorkItem workItem,@QueryParam("itemstatus")String itemStatus) {
+		WorkItem workItemToUpdate = itemRepository.changeStatus(workItem,Enum.valueOf(ItemStatus.class, itemStatus));
+		URI location = uriInfo.getAbsolutePathBuilder().path(workItemToUpdate.getItemID().toString()).build();
+		return Response.created(location).entity(workItemToUpdate).build();
 	}
 
 	/**
@@ -59,9 +69,10 @@ public class WorkItemService {
 	 *            the id of the item to be modified
 	 */
 	@DELETE
-	@Path("{itemID}")
-	public Response deleteWorkItem() {
-		return null;
+	public Response deleteWorkItem(WorkItem workItem) {
+		WorkItem workItemToDelete = itemRepository.delete(workItem);
+		URI location = uriInfo.getAbsolutePathBuilder().path(workItemToDelete.getItemID().toString()).build();
+		return Response.created(location).entity(workItemToDelete).build();
 	}
 
 //	/**
@@ -76,26 +87,35 @@ public class WorkItemService {
 	 * get item by status
 	 * */
 	@GET
-	public Response getWorkItemsByStatus(@QueryParam("status")String status) {
-		return null;
+	public Response getWorkItemsByStatus(@QueryParam("itemstatus")String itemstatus) {
+		List<WorkItem> workItemsByStatus = itemRepository.getByStatus(Enum.valueOf(ItemStatus.class, itemstatus));
+		GenericEntity<Collection<WorkItem>> result = 
+				new GenericEntity<Collection<WorkItem>>(workItemsByStatus){};	
+		return Response.ok(result).build();
 	}
 
 	/**
 	 * get items by team
 	 * */
 	@GET
-	@Path("/byteam")
-	public Response getWorkItemsByTeam() {
-		return null;
+	@Path("/byteam/{name}")
+	public Response getWorkItemsByTeam(@PathParam("name")String name) {
+		List<WorkItem> workItemsByTeam = itemRepository.getByTeam(teamRepository.getTeamByName(name));
+		GenericEntity<Collection<WorkItem>> result = 
+				new GenericEntity<Collection<WorkItem>>(workItemsByTeam){};	
+		return Response.ok(result).build();
 	}
 
 	/**
 	 * get items by user
 	 * */
 	@GET
-	@Path("/byuser")
-	public Response getWorkItemsByUser() {
-		return null;
+	@Path("/byuser/{memberId}")
+	public Response getWorkItemsByMember(@PathParam("memberId")String memberId) {
+		List<WorkItem> workItemsByMember = itemRepository.getByMember(memberRepository.getById(memberId));
+		GenericEntity<Collection<WorkItem>> result = 
+				new GenericEntity<Collection<WorkItem>>(workItemsByMember){};	
+		return Response.ok(result).build();
 	}
 
 	/**
@@ -104,7 +124,10 @@ public class WorkItemService {
 	@GET
 	@Path("/byword")
 	public Response getWorkItemsByWord(@QueryParam("filter")String word) {
-		return null;
+		List<WorkItem> workItemsByWord = itemRepository.getByWordFilter(word);
+		GenericEntity<Collection<WorkItem>> result = 
+				new GenericEntity<Collection<WorkItem>>(workItemsByWord){};	
+		return Response.ok(result).build();
 	}
 
 	/**
@@ -112,17 +135,16 @@ public class WorkItemService {
 	 * */
 	@GET
 	@Path("/withissues")
-	public Response getWorkItemsWithIssues(@QueryParam("issues")boolean hasIssues) {
-		return null;
+	public Response getWorkItemsWithIssues() {
+		List<WorkItem> workItemsWithIssues = itemRepository.getWorkItemsWithIssues();
+		GenericEntity<Collection<WorkItem>> result = 
+				new GenericEntity<Collection<WorkItem>>(workItemsWithIssues){};	
+		return Response.ok(result).build();
 	}
 
 	/**
 	 * 
 	 * */
-	@PUT
-	@Path("/addIssue/{itemID}")
-	public Response addIssueToWorkItem(@PathParam("itemID")String itemID) {
-		return null;
-	}
+	
 
 }

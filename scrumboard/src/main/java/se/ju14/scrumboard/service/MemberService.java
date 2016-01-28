@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,15 +13,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 import se.ju14.scrumboard.model.Member;
-import se.ju14.scrumboard.repository.JpaMemberRepository;
-import se.ju14.scrumboard.repository.JpaTeamRepository;
 
 /**
  * This class manages the Member functions and service
@@ -30,15 +25,12 @@ import se.ju14.scrumboard.repository.JpaTeamRepository;
  * @author Erik Pérez Jesper Wendler
  */
 @Path("/member")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class MemberService {
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
+public class MemberService extends ScrumService {
 
-	JpaMemberRepository memberRepository = new JpaMemberRepository();
-	JpaTeamRepository teamRepository = new JpaTeamRepository();
 	
-	@Context
-	private UriInfo uriInfo;
+	
 
 	/**
 	 * Creates a new Member
@@ -68,12 +60,10 @@ public class MemberService {
 	 */
 	@PUT
 	@Path("{id}")
-	public Response updateMember(@PathParam("id") String memberId) {
-		Member member = memberRepository.update(memberRepository.getById(memberId));
-
-		URI location = uriInfo.getAbsolutePathBuilder().path(member.getMemberId().toString()).build();
-
-		return Response.created(location).entity(member).build();
+	public Response updateMember(@PathParam("id") String memberId,Member member) {
+		Member memberToUpdate = memberRepository.update(member);
+		URI location = uriInfo.getAbsolutePathBuilder().path(memberToUpdate.getMemberId().toString()).build();
+		return Response.created(location).entity(memberToUpdate).build();
 
 	}
 
@@ -87,11 +77,9 @@ public class MemberService {
 	@DELETE
 	@Path("{id}")
 	public Response deleteMember(@PathParam("id") String MemberId) {
-
 		Member member = memberRepository.getById(MemberId);
 		memberRepository.delete(member);
-
-		return Response.ok("Member: " + "is " + member.getMemberStatus()).build();
+		return Response.ok(member).build();
 	}
 
 	/**
@@ -105,6 +93,49 @@ public class MemberService {
 	@Path("{id}")
 	public Response getMemberById(@PathParam("id") String MemberId) {
 		Member member = memberRepository.getById(MemberId);
+		return Response.ok(member).build();
+	}
+	
+	/**
+	 * Get an Members by its firstname
+	 * 
+	 * @param firstname
+	 *            The firstname of the Member to be found
+	 * @return The Member object found by its firstname
+	 */
+	@GET
+	public Response getMemberByFirstName(@QueryParam("firstname") String firstname) {
+		List<Member> members = memberRepository.getByFirstName(firstname);
+		GenericEntity<Collection<Member>> result = 
+				new GenericEntity<Collection<Member>>(members){};	
+		return Response.ok(result).build();
+	}
+	
+	/**
+	 * Get an Member by its lastname
+	 * 
+	 * @param lastname
+	 *            The lastname of the Member to be found
+	 * @return The Member object found by its lastname
+	 */
+	@GET
+	public Response getMemberByLastName(@QueryParam("lastname") String lastname) {
+		List<Member> members = memberRepository.getByLastName(lastname);
+		GenericEntity<Collection<Member>> result = 
+				new GenericEntity<Collection<Member>>(members){};	
+		return Response.ok(result).build();
+	}
+	
+	/**
+	 * Get an Member by its username
+	 * 
+	 * @param username
+	 *            The username the Member to be found
+	 * @return The Member object found by its username
+	 */
+	@GET
+	public Response getMemberByUserName(@QueryParam("username") String username) {
+		Member member = memberRepository.getByUserName(username);
 		return Response.ok(member).build();
 	}
 

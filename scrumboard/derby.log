@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Thu Jan 28 04:57:41 CET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0152-8661-2ca1-000003f2bbe8 
+Thu Jan 28 09:58:16 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0152-8774-5a94-00000701b3d8 
 on database directory C:\scrumboardDB with class loader sun.misc.Launcher$AppClassLoader@4e0e2f2a 
-Loaded from file:/C:/Users/Erick/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+Loaded from file:/C:/Users/Erik/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_65-b17
-user.dir=C:\Users\Erick\Documents\integration_ju14\scrumboard
+java.runtime.version=1.8.0_60-b27
+user.dir=C:\Users\Erik\Documents\integration_ju14\scrumboard
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

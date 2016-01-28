@@ -107,4 +107,9 @@ public final class JpaWorkItemRepository extends InMemoryRepository<WorkItem> im
 		return resultList;
 	}
 
+	@Override
+	public WorkItem getById(String itemID) {
+		return super.executeQuery("WorkItem.findByID", WorkItem.class, "itemID", itemID).get(0);		
+	}
+
 }

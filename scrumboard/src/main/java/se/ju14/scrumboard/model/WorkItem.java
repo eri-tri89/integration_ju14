@@ -29,7 +29,7 @@ import se.ju14.scrumboard.model.status.PriorityStatus;
 @NamedQueries({
 	@NamedQuery(name="WorkItem.findAll",query="Select w from WorkItem w"),
 	@NamedQuery(name="WorkItem.findByStatus",query="Select w from WorkItem w where w.itemStatus = :itemStatus"),
-	//@NamedQuery(name="WorkItem.findById",query="Select w from WorkItem w where w.itemID = :itemID")
+	@NamedQuery(name="WorkItem.findById",query="Select w from WorkItem w where w.itemID = :itemID")
 })
 public class WorkItem {
 
