@@ -11,10 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import se.ju14.scrumboard.model.Member;
@@ -104,6 +102,7 @@ public class MemberService extends ScrumService {
 	 * @return The Member object found by its firstname
 	 */
 	@GET
+	@Path("/getbyfirstname")
 	public Response getMemberByFirstName(@QueryParam("firstname") String firstname) {
 		List<Member> members = memberRepository.getByFirstName(firstname);
 		GenericEntity<Collection<Member>> result = 
@@ -119,6 +118,7 @@ public class MemberService extends ScrumService {
 	 * @return The Member object found by its lastname
 	 */
 	@GET
+	@Path("/getbylastname")
 	public Response getMemberByLastName(@QueryParam("lastname") String lastname) {
 		List<Member> members = memberRepository.getByLastName(lastname);
 		GenericEntity<Collection<Member>> result = 
@@ -134,6 +134,7 @@ public class MemberService extends ScrumService {
 	 * @return The Member object found by its username
 	 */
 	@GET
+	@Path("/getbyusername")
 	public Response getMemberByUserName(@QueryParam("username") String username) {
 		Member member = memberRepository.getByUserName(username);
 		return Response.ok(member).build();
@@ -147,6 +148,7 @@ public class MemberService extends ScrumService {
 	 * @return The Member object to be found by its team id
 	 */
 	@GET
+	@Path("/getbyteam")
 	public Response getMembersByTeam(@QueryParam("teamname") String teamName) {
 		List<Member> membersByTeam = memberRepository.getTeamMembers(teamRepository.getTeamByName(teamName));
 		Collection<Member> members = new HashSet<Member>(membersByTeam);
