@@ -1,15 +1,14 @@
 package se.ju14.scrumboard.model;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,12 +30,8 @@ import se.ju14.scrumboard.model.status.MemberStatus;
 	@NamedQuery(name = "Member.findByLastName", query = "Select m from Member m where m.lastName = :lastName"),
 	@NamedQuery(name = "Member.findByUserName", query = "Select m from Member m where m.userName = :userName")
 	})
-public class Member{
+public class Member extends JpaEntity{
 
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
 	private String memberId;
 	private String firstName;
 	private String lastName;
@@ -48,7 +43,7 @@ public class Member{
 	@Enumerated(EnumType.STRING)
 	private MemberStatus memberStatus;
 
-	@OneToMany
+	@OneToMany(orphanRemoval=true)
 	@JoinColumn(nullable = true)	
 	private Set<WorkItem> workItems;
 
@@ -57,15 +52,12 @@ public class Member{
 	}
 
 	public Member(String firstName, String lastName, String userName) {
+		this.memberId = UUID.randomUUID().toString() + new Random().nextInt(9);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
 		this.memberStatus = MemberStatus.ACTIVE;
 		this.workItems = new HashSet<WorkItem>();
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public String getMemberId() {
@@ -114,8 +106,12 @@ public class Member{
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", memberId=" + memberId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", userName=" + userName + ", memberStatus=" + memberStatus + ", workItems=" + workItems + "]";
+		String tmp = "";
+		for(WorkItem w:workItems){
+			tmp+=" "+w+" ";
+		}
+		return "Member [id=" + super.getId() + ", memberId=" + memberId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", memberStatus=" + memberStatus + ", workItems=" + tmp + "]";
 	}
 
 }

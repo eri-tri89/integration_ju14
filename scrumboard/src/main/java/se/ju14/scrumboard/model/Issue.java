@@ -1,12 +1,12 @@
 package se.ju14.scrumboard.model;
 
+import java.util.Random;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -22,11 +22,8 @@ import se.ju14.scrumboard.model.status.IssueStatus;
 @NamedQueries(
 		@NamedQuery(name="Issue.findById",query="Select i from Issue i where i.issueID = :issueID")
 		)
-public final class Issue {
+public final class Issue extends JpaEntity{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 	private String issueID;
 	private String title;
 	private String description;
@@ -41,15 +38,12 @@ public final class Issue {
 
 	public Issue(String title, String description) {
 		super();
+		this.issueID = UUID.randomUUID().toString() + new Random().nextInt(9);
 		this.title = title;
 		this.description = description;
 		this.issueStatus = IssueStatus.ACTIVE;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	
 	public String getIssueID() {
 		return issueID;
 	}
@@ -84,7 +78,7 @@ public final class Issue {
 
 	@Override
 	public String toString() {
-		return "Issue [id=" + id + ", title=" + title + ", description=" + description + ", issueStatus=" + issueStatus
+		return "Issue [id=" + super.getId() + ", title=" + title + ", description=" + description + ", issueStatus=" + issueStatus
 				+ "]";
 	}
 	

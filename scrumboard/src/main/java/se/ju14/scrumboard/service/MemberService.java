@@ -75,7 +75,7 @@ public class MemberService extends ScrumService {
 	@DELETE
 	@Path("{id}")
 	public Response deleteMember(@PathParam("id") String MemberId) {
-		Member member = memberRepository.getById(MemberId);
+		Member member = memberRepository.getByMemberId(MemberId);
 		memberRepository.delete(member);
 		return Response.ok(member).build();
 	}
@@ -90,7 +90,7 @@ public class MemberService extends ScrumService {
 	@GET
 	@Path("{id}")
 	public Response getMemberById(@PathParam("id") String MemberId) {
-		Member member = memberRepository.getById(MemberId);
+		Member member = memberRepository.getByMemberId(MemberId);
 		return Response.ok(member).build();
 	}
 	

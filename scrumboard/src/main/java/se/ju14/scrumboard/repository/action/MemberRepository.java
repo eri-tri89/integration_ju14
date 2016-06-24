@@ -6,15 +6,18 @@ import java.util.List;
 
 import se.ju14.scrumboard.model.Member;
 import se.ju14.scrumboard.model.Team;
+import se.ju14.scrumboard.model.WorkItem;
 
 public interface MemberRepository extends CrudRepository<Member> {
 
+	
+	Member addWorkItemToMember(Member member,WorkItem workItem);
 	/**
 	 * Gets a single Member entity by its memberId
 	 * @param memberId the id of the element to get
 	 * @return the Member with the parameter id
 	 * */
-	Member getById(String memberId);
+	Member getByMemberId(String memberId);
 	
 	/**
 	 * Gets a list of Members by its first name

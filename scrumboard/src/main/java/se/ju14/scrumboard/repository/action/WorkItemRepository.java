@@ -2,6 +2,7 @@ package se.ju14.scrumboard.repository.action;
 
 import java.util.List;
 
+import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.Member;
 import se.ju14.scrumboard.model.Team;
 import se.ju14.scrumboard.model.WorkItem;
@@ -13,13 +14,8 @@ import se.ju14.scrumboard.model.status.ItemStatus;
  */
 public interface WorkItemRepository{
 
-	/**
-	 * Saves and Assigns a workitem to a member
-	 * @param member the member that will obtain the workItem
-	 * @param workItem the workItem to be added in the member's workItem's list
-	 * @return The saved workItem
-	 * */
-	WorkItem saveAndAssignToMember(Member member, WorkItem workItem);
+
+	WorkItem addIssue(WorkItem workItem, Issue issue);
 	
 	/**
 	 * Updates the status of a workitem
@@ -49,7 +45,7 @@ public interface WorkItemRepository{
 	 * @param itemId the id that belongs to the workItem
 	 * @return a work Item object
 	 * */
-	WorkItem getById(String itemId);
+	WorkItem getByItemId(String itemId);
 	
 	/**
 	 * Gets a list of workItems by its status

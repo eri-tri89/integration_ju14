@@ -11,13 +11,6 @@ import se.ju14.scrumboard.model.WorkItem;
  */
 public interface IssueRepository{
 
-	/**
-	 * Adds an issue to a workItem
-	 * @param workItem the workItem that will add the issue
-	 * @param issue the issue to be added
-	 * @return the workItem with the issue list filled with the issue in the param
-	 * */
-	WorkItem addIssueToWorkItem(WorkItem workItem,Issue issue);
 	
 	/**
 	 * Updates an issue

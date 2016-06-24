@@ -2,7 +2,9 @@ package se.ju14.scrumboard.model;
 
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,11 +33,7 @@ import se.ju14.scrumboard.model.status.PriorityStatus;
 	@NamedQuery(name="WorkItem.findByStatus",query="Select w from WorkItem w where w.itemStatus = :itemStatus"),
 	@NamedQuery(name="WorkItem.findById",query="Select w from WorkItem w where w.itemID = :itemID")
 })
-public class WorkItem {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public class WorkItem extends JpaEntity{
 	
 	private String itemID;
 
@@ -51,7 +49,7 @@ public class WorkItem {
 	private PriorityStatus priorityStatus;
 	
 	@JoinColumn(nullable=true)
-	@OneToMany
+	@OneToMany(orphanRemoval=true)
 	private Set<Issue> issues;	
 	
 	public WorkItem() {
@@ -59,15 +57,12 @@ public class WorkItem {
 	}
 
 	public WorkItem(String subject, String description) {
+		this.itemID = UUID.randomUUID().toString() + new Random().nextInt(9);
 		this.subject = subject;
 		this.description = description;
 		this.itemStatus = ItemStatus.ACTIVE;
 		this.priorityStatus = PriorityStatus.NORMAL;
-		this.issues = new HashSet<Issue>(0);
-	}
-
-	public Long getId() {
-		return id;
+		this.issues = new HashSet<Issue>();
 	}
 
 	public String getItemID() {
@@ -112,8 +107,12 @@ public class WorkItem {
 
 	@Override
 	public String toString() {
-		return "WorkItem [id=" + id + ", itemID=" + itemID + ", subject=" + subject + ", description=" + description
-				+ ", itemStatus=" + itemStatus + ", priorityStatus=" + priorityStatus + ", issues=" + issues + "]";
+		String tmp = "";
+		for(Issue i:issues){
+			tmp += " "+i+" ";
+		}
+		return "WorkItem [id=" + super.getId() + ", itemID=" + itemID + ", subject=" + subject + ", description=" + description
+				+ ", itemStatus=" + itemStatus + ", priorityStatus=" + priorityStatus + ", issues=" + tmp + "]";
 	}
 
 	

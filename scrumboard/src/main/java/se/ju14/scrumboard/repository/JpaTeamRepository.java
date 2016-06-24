@@ -9,109 +9,55 @@ import se.ju14.scrumboard.repository.action.TeamRepository;
 
 /**
  * This Class executes the transactions that has to do with the Team entity
+ * 
  * @author Pierre Vanderpol, Jesper Wendler, Erik Perez
  *
  */
 public final class JpaTeamRepository extends InMemoryRepository<Team> implements TeamRepository {
 
 	public JpaTeamRepository() {
-		super();
+		super("Team", Team.class);
 	}
 
 	@Override
 	public Team save(Team entity) {
-		super.saveOrUpdateEntity(manager -> {
-			manager.persist(entity);
-		});
-		return entity;
+		return super.saveOrUpdateEntity(null, entity);
 	}
 
 	@Override
 	public Team update(Team entity) {
-		super.saveOrUpdateEntity(manager -> {
-			if (manager.find(Team.class, entity.getId()) != null)
-				manager.merge(entity);
-		});
-		return entity;
+		return super.saveOrUpdateEntity(entity.getId(), entity);
 	}
 
 	@Override
 	public Team delete(Team entity) {
-		super.saveOrUpdateEntity(manager -> {
-			if (manager.find(Team.class, entity.getId()) != null) {
-				entity.setTeamStatus(TeamStatus.DELETED);
-				manager.merge(entity);
-			}
-		});
-		return entity;
+		Team teamFound = super.getById(entity.getId());
+		if(teamFound != null){
+			teamFound.setTeamStatus(TeamStatus.DELETED);
+			return this.update(teamFound);
+		}
+		throw new RuntimeException("Team to delete not found");
 	}
 
 	@Override
 	public List<Team> getAll() {
-		return super.executeFindAll("Team", Team.class);
+		return super.executeFindAll();
 	}
 
 	@Override
 	public Team getTeamByName(String name) {
-		return super.executeQuery("Team.findByName", Team.class, "name", name).get(0);
+		List<Team> tmp = super.executeQuery("findByName","name", name);
+		return tmp.isEmpty() ? tmp.get(0) : null;
 	}
 
 	@Override
 	public Team addMemberToTeam(Member member, Team team) {
-		super.saveOrUpdateEntity(manager -> {
-			if (manager.find(Team.class, team.getId()) != null) {
-				if (manager.find(Member.class, member.getId()) != null) {
-					team.getMembers().add(member);
-					manager.merge(team);
-				}
-			}
-		});
-		return team;
+		Team teamFound = super.getById(team.getId());
+		if(teamFound != null){
+			teamFound.getMembers().add(member);
+			return this.update(teamFound);
+		}
+		throw new RuntimeException("Team not found");
 	}
-
-	// @Override
-	// public Team create(Team entity) {
-	// super.saveOrUpdateEntity(manager -> {
-	// manager.persist(entity);
-	// });
-	// return entity;
-	// }
-	//
-	// @Override
-	// public Team update(Team entity) {
-	// super.saveOrUpdateEntity(manager -> {
-	// manager.merge(entity);
-	// });
-	// return null;
-	// }
-	//
-	// @Override
-	// public Team delete(Team entity) {
-	// super.saveOrUpdateEntity(manager -> {
-	// entity.setTeamStatus(TeamStatus.DELETED);
-	// manager.merge(entity);
-	// });
-	// return entity;
-	// }
-	//
-	// @Override
-	// public List<Team> getAll() {
-	// return super.executeFindAll("Team.findAll", Team.class);
-	// }
-	//
-	// @Override
-	// public Team getTeamByName(String name) {
-	// return super.executeQuery("Team.findByName", Team.class, "name",
-	// name).get(0);
-	// }
-	//
-	// @Override
-	// public List<Member> getAllTeamMembers(String name) {
-	// List<Member> membersList = new ArrayList<Member>();
-	// Team team = super.executeQuery("Team.findByName", Team.class, "name",
-	// name).get(0);
-	// membersList.addAll(team.getMembers());
-	// return membersList;
-	// }
 
 }

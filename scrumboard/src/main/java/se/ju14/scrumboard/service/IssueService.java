@@ -32,9 +32,10 @@ public class IssueService extends ScrumService {
 	@POST
 	@Path("/addIssue/{itemID}")
 	public Response addIssueToWorkItem(@PathParam("itemID")String itemID,Issue issue) {
-		WorkItem workItemToUpdate = issueRepository.addIssueToWorkItem(itemRepository.getById(itemID), issue);
-		URI location = uriInfo.getAbsolutePathBuilder().path(workItemToUpdate.getItemID().toString()).build();
-		return Response.created(location).entity(workItemToUpdate).build();
+//		WorkItem workItemToUpdate = itemRepository.addIssue(workItem, issue)(itemRepository.getById(itemID), issue);
+//		URI location = uriInfo.getAbsolutePathBuilder().path(workItemToUpdate.getItemID().toString()).build();
+//		return Response.created(location).entity(workItemToUpdate).build();
+		return null;
 	}
 	
 	/**

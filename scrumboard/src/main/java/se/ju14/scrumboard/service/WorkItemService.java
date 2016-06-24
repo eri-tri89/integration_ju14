@@ -44,7 +44,7 @@ public class WorkItemService extends ScrumService {
 	@POST
 	@Path("/assigntouser/{memberId}")
 	public Response createWorkItem(@PathParam("memberId") String memberId, WorkItem workItem) {		
-		WorkItem workItemToUpdate = itemRepository.saveAndAssignToMember(memberRepository.getById(memberId), workItem);
+		WorkItem workItemToUpdate = null;//itemRepository.saveAndAssignToMember(memberRepository.getById(memberId), workItem);
 		URI location = uriInfo.getAbsolutePathBuilder().path(workItemToUpdate.getItemID().toString()).build();
 		return Response.created(location).entity(workItemToUpdate).build();
 	}
@@ -112,7 +112,7 @@ public class WorkItemService extends ScrumService {
 	@GET
 	@Path("/byuser/{memberId}")
 	public Response getWorkItemsByMember(@PathParam("memberId")String memberId) {
-		List<WorkItem> workItemsByMember = itemRepository.getByMember(memberRepository.getById(memberId));
+		List<WorkItem> workItemsByMember = itemRepository.getByMember(memberRepository.getByMemberId(memberId));
 		GenericEntity<Collection<WorkItem>> result = 
 				new GenericEntity<Collection<WorkItem>>(workItemsByMember){};	
 		return Response.ok(result).build();
