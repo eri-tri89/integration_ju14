@@ -52,8 +52,9 @@ public final class JpaWorkItemRepository extends InMemoryRepository<WorkItem> im
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<WorkItem> getByStatus(ItemStatus itemStatus) {
-		return super.executeQuery("findByStatus", "itemStatus", itemStatus);
+		return (List<WorkItem>)super.executeQuery(true,"findByStatus", "itemStatus", itemStatus);
 	}
 
 	@Override
@@ -89,8 +90,7 @@ public final class JpaWorkItemRepository extends InMemoryRepository<WorkItem> im
 
 	@Override
 	public WorkItem getByItemId(String itemID) {
-		List<WorkItem> tmp = super.executeQuery("findById", "itemID", itemID);
-		return !tmp.isEmpty()?tmp.get(0):null;
+		return (WorkItem)super.executeQuery(false,"findById", "itemID", itemID);
 	}
 
 

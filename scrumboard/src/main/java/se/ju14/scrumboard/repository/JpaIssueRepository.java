@@ -1,7 +1,5 @@
 package se.ju14.scrumboard.repository;
 
-import java.util.List;
-
 import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.status.IssueStatus;
 import se.ju14.scrumboard.repository.action.IssueRepository;
@@ -35,8 +33,7 @@ public final class JpaIssueRepository extends InMemoryRepository<Issue> implemen
 
 	@Override
 	public Issue getByID(String issueID) {
-		List<Issue> tmp = super.executeQuery("findById", "issueID", issueID);
-		return !tmp.isEmpty() ? tmp.get(0) : null;
+		return (Issue)super.executeQuery(false,"findById", "issueID", issueID);
 	}
 
 }

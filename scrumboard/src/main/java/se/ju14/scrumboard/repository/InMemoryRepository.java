@@ -7,6 +7,7 @@ import java.util.function.Function;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import se.ju14.scrumboard.model.JpaEntity;
 
@@ -127,14 +128,16 @@ public class InMemoryRepository<T extends JpaEntity> {
 	 *            the object to be found within the entity
 	 * @return a result list from the query executed
 	 */
-	protected List<T> executeQuery(String query, String param, Object toFind) {
+	protected Object executeQuery(boolean returnList, String query, String param, Object toFind) {
 		entityManager = createEntityManager();
 		try {
-			return entityManager.createNamedQuery(className + "." + query, entityClass).setParameter(param, toFind)
-					.getResultList();
+			TypedQuery<T> typedQuery = entityManager.createNamedQuery(className + "." + query, entityClass).setParameter(param, toFind);
+			return (returnList)
+					? typedQuery.getResultList()
+					: typedQuery.getSingleResult();
 		} finally {
 			entityManager.close();
 		}
 	}
-
+	
 }

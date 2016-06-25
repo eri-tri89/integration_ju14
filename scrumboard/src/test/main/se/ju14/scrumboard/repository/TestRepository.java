@@ -2,14 +2,19 @@ package se.ju14.scrumboard.repository;
 
 import org.junit.Test;
 
+import com.google.gson.Gson;
+
 import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.JpaEntity;
 import se.ju14.scrumboard.model.Member;
 import se.ju14.scrumboard.model.Team;
 import se.ju14.scrumboard.model.WorkItem;
+import se.ju14.scrumboard.model.status.ItemStatus;
 
 public class TestRepository {
 
+	Gson gson = new Gson();
+	
 	Member m1, m2, m3;
 	Team t1, t2;
 	WorkItem w1, w2, w3;
@@ -66,6 +71,9 @@ public class TestRepository {
 		addWorkItemToMember();
 		addIssuesToWorkItems();
 		showSavedMembers();
+		showSavedTeams();
+		showSavedWorkItems();
+		showIssues();
 	}
 	
 	private void saveMembersAndTeams(){
@@ -86,19 +94,19 @@ public class TestRepository {
 	}
 	
 	private void deleteMember(){
-		memberRepo.delete(m3);
+		m3 = memberRepo.delete(m3);
 	}
 	
 	private void addWorkItemToMember(){
-		memberRepo.addWorkItemToMember(m1, w1);
-		memberRepo.addWorkItemToMember(m2, w2);
-		memberRepo.addWorkItemToMember(m2, w3);
+		m1 = memberRepo.addWorkItemToMember(m1, w1);
+		m2 = memberRepo.addWorkItemToMember(m2, w2);
+		m2 = memberRepo.addWorkItemToMember(m2, w3);
 	}
 	
 	private void addMembersToTeam(){
-		teamRepo.addMemberToTeam(m1, t1);
-		teamRepo.addMemberToTeam(m2, t2);
-		teamRepo.addMemberToTeam(m3, t2);
+		t1 = teamRepo.addMemberToTeam(m1, t1);
+		t2 = teamRepo.addMemberToTeam(m2, t2);
+		t2 = teamRepo.addMemberToTeam(m3, t2);
 	}
 	
 	private void addIssuesToWorkItems(){
@@ -107,15 +115,29 @@ public class TestRepository {
 	}
 	
 	private void showSavedMembers(){
-		System.out.println("Getting all Members = " + memberRepo.getAll());
-		System.out.println("Getting by firstName = ("+m2.getFirstName()+") \n" + memberRepo.getByFirstName(m2.getFirstName()));
-		System.out.println("Getting by lastName = ("+m3.getLastName()+") \n"+memberRepo.getByLastName(m3.getLastName()));
-		System.out.println("Getting by memberId ("+m1.getMemberId()+")\n"+memberRepo.getByMemberId(m1.getMemberId()));
-		System.out.println("Getting by username ("+m2.getUserName()+") \n"+memberRepo.getByUserName(m2.getUserName()));
-		System.out.println("Getting by team ("+t2.getName()+")\n");
-		//TODO: fix this: returns null even if the name of the team is registered in the DB
-		for(Member m:teamRepo.getTeamByName(t2.getName()).getMembers()){
-			System.out.println(m);
-		}
+		System.out.println("Getting all Members = \n" + gson.toJson(memberRepo.getAll()));
+		System.out.println("Getting by firstName = ("+m2.getFirstName()+") \n" + gson.toJson(memberRepo.getByFirstName(m2.getFirstName())));
+		System.out.println("Getting by lastName = ("+m3.getLastName()+") \n"+gson.toJson(memberRepo.getByLastName(m3.getLastName())));
+		System.out.println("Getting by memberId ("+m1.getMemberId()+")\n"+gson.toJson(memberRepo.getByMemberId(m1.getMemberId())));
+		System.out.println("Getting by username ("+m2.getUserName()+") \n"+gson.toJson(memberRepo.getByUserName(m2.getUserName())));
+		System.out.println("Get team members by team name (Team2)\n"+gson.toJson(teamRepo.getTeamByName("Team2").getMembers()));
+	}
+	
+	private void showSavedTeams(){
+		System.out.println("Getting all Teams = \n"+gson.toJson(teamRepo.getAll()));
+		System.out.println("Getting by team name ("+t2.getName()+")\n"+gson.toJson(teamRepo.getTeamByName(t2.getName())));
+	}
+	
+	private void showSavedWorkItems(){
+		System.out.println("Getting workitem by id("+w1.getItemID()+") = \n"+gson.toJson(wiRepo.getByItemId(w1.getItemID())));
+		System.out.println("Getting workitems by Member ("+m1+") = \n"+gson.toJson(wiRepo.getByMember(m2)));
+		System.out.println("Getting workitems by ItemStatus ("+ItemStatus.ACTIVE.toString()+") = \n"+gson.toJson(wiRepo.getByStatus(ItemStatus.ACTIVE)));
+		System.out.println("Getting workItems by Team ("+gson.toJson(teamRepo.getTeamByName("Team2"))+") = \n"+gson.toJson(wiRepo.getByTeam(teamRepo.getTeamByName("Team2"))));
+		System.out.println("Getting workitems by wordfilter (\"subject\")\n"+gson.toJson(wiRepo.getByWordFilter("subject")));
+		System.out.println("Getting workitems with issues \n"+wiRepo.getWorkItemsWithIssues());
+	}
+	
+	private void showIssues(){
+		System.out.println("Getting issue by its issueID ("+i2.getIssueID()+") = \n"+gson.toJson(isRepo.getByID(i2.getIssueID())));
 	}
 }

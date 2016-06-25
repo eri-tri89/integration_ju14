@@ -47,24 +47,24 @@ public final class JpaMemberRepository extends InMemoryRepository<Member> implem
 
 	@Override
 	public Member getByMemberId(String memberId) {
-		List<Member> tmp = super.executeQuery("findById", "memberId", memberId);
-		return (!tmp.isEmpty())?tmp.get(0):null;
+		return (Member)super.executeQuery(false,"findById", "memberId", memberId);
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Member> getByFirstName(String firstName) {
-		return super.executeQuery("findByFirstName", "firstName", firstName);
+		return (List<Member>)super.executeQuery(true,"findByFirstName", "firstName", firstName);
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Member> getByLastName(String lastName) {
-		return super.executeQuery("findByLastName","lastName", lastName);
+		return (List<Member>)super.executeQuery(true,"findByLastName","lastName", lastName);
 	}
 
 	@Override
 	public Member getByUserName(String userName) {
-		List<Member> tmp = super.executeQuery("findByUserName", "userName", userName);
-		return (!tmp.isEmpty())?tmp.get(0):null;
+		return (Member)super.executeQuery(false,"findByUserName", "userName", userName);
 	}
 
 	@Override

@@ -46,8 +46,7 @@ public final class JpaTeamRepository extends InMemoryRepository<Team> implements
 
 	@Override
 	public Team getTeamByName(String name) {
-		List<Team> tmp = super.executeQuery("findByName","name", name);
-		return tmp.isEmpty() ? tmp.get(0) : null;
+		return (Team)super.executeQuery(false,"findByName","name", name);
 	}
 
 	@Override
