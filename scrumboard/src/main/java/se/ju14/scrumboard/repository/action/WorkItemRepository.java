@@ -12,7 +12,7 @@ import se.ju14.scrumboard.model.status.ItemStatus;
  * @author Pierre Vanderpol
  *
  */
-public interface WorkItemRepository{
+public interface WorkItemRepository extends CrudRepository<WorkItem>{
 
 
 	WorkItem addIssue(WorkItem workItem, Issue issue);

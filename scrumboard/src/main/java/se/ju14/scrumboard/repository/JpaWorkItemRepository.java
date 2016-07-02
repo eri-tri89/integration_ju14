@@ -32,11 +32,28 @@ public final class JpaWorkItemRepository extends InMemoryRepository<WorkItem> im
 		}
 		throw new RuntimeException("WorkItem not found");
 	}
-
+	
+	@Override
+	public WorkItem save(WorkItem entity) {
+		return super.saveOrUpdateEntity(null, entity);
+	}
+	
+	
+	@Override
+	public WorkItem update(WorkItem entity) {
+		return super.saveOrUpdateEntity(entity.getId(), entity);
+	}
+	
 	@Override
 	public WorkItem delete(WorkItem workItem) {
 		return this.changeStatus(workItem, ItemStatus.DELETED);
 	}
+	
+	@Override
+	public List<WorkItem> getAll() {
+		return super.executeFindAll();
+	}
+
 
 	@Override
 	public List<WorkItem> getByTeam(Team team) {

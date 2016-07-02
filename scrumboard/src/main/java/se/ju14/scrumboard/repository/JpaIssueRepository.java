@@ -1,5 +1,7 @@
 package se.ju14.scrumboard.repository;
 
+import java.util.List;
+
 import se.ju14.scrumboard.model.Issue;
 import se.ju14.scrumboard.model.status.IssueStatus;
 import se.ju14.scrumboard.repository.action.IssueRepository;
@@ -22,6 +24,16 @@ public final class JpaIssueRepository extends InMemoryRepository<Issue> implemen
 	}
 
 	@Override
+	public Issue save(Issue entity) {
+		return super.saveOrUpdateEntity(null, entity);
+	}
+	
+	@Override
+	public List<Issue> getAll() {
+		return super.executeFindAll();
+	}
+	
+	@Override
 	public Issue delete(Issue issue) {
 		Issue issueFound = super.getById(issue.getId());
 		if (issueFound != null) {
@@ -35,5 +47,6 @@ public final class JpaIssueRepository extends InMemoryRepository<Issue> implemen
 	public Issue getByID(String issueID) {
 		return (Issue)super.executeQuery(false,"findById", "issueID", issueID);
 	}
+
 
 }
